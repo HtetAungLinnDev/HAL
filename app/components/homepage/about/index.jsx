@@ -3,27 +3,10 @@ import Link from "next/link";
 import { personalData } from "@/utils/data/personal-data";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
+import CommonTitle from "@/app/components/common/CommonTitle";
 const AboutSection = () => {
     return (
-        <div
-            id="about"
-            className="realtive z-50 border-t my-12 border-[#25213b]"
-        >
-            <Image
-                src="/section.svg"
-                alt="Hero"
-                width={1572}
-                height={795}
-                className=" absolute top-0 -z-10"
-            />
-            <div className=" flex justify-center -translate-y-[1px]">
-                <div className="w-3/4">
-                    <div className="h-[2px] bg-gradient-to-r from-transparent via-violet-500 to-transparent w-full"></div>
-                </div>
-            </div>
-            <div className="text-pink-500 text-[14px] my-24 flex justify-center uppercase tracking-widest">
-                [About Me]
-            </div>
+        <CommonTitle id="about" title="About Me">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
                 <div className="order-2 lg:order-1">
                     <div className="font-medium mb-5 text-[#16f2b3] text-3xl mt-5 uppercase">
@@ -73,7 +56,7 @@ const AboutSection = () => {
                     />
                 </div>
             </div>
-        </div>
+        </CommonTitle>
     );
 };
 

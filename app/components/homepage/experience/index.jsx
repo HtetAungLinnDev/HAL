@@ -1,34 +1,17 @@
 import { experiences, awards } from "@/utils/data/experience";
 import Image from "next/image";
 import GlowCard from "@/app/components/helper/glow-card";
+import CommonTitle from "@/app/components/common/CommonTitle";
 const Experience = () => {
     return (
-        <div
-            id="experience"
-            className="realtive z-50 border-t my-12 border-[#25213b]"
-        >
-            <Image
-                src="/section.svg"
-                alt="Hero"
-                width={1572}
-                height={795}
-                className=" absolute top-0 -z-10"
-            />
-            <div className=" flex justify-center -translate-y-[1px]">
-                <div className="w-3/4">
-                    <div className="h-[2px] bg-gradient-to-r from-transparent via-violet-500 to-transparent w-full"></div>
-                </div>
-            </div>
-            <div className="text-pink-500 text-[14px] my-24 flex justify-center uppercase tracking-widest">
-                [Awards & Honours]
-            </div>
+        <CommonTitle id="experience" title="Awards & Honours">
             <div className="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl opacity-20"></div>
             <div className="">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
                     <div className="flex flex-col gap-6">
                         {awards.map((award) => (
                             <GlowCard
-                                identifire={`award-${award.id}`}
+                                identifier={`award-${award.id}`}
                                 key={award.id}
                             >
                                 <div className="p-3 relative">
@@ -69,7 +52,7 @@ const Experience = () => {
                         <div className="flex flex-col gap-6">
                             {experiences.map((experience) => (
                                 <GlowCard
-                                    identifire={`experience-${experience.id}`}
+                                    identifier={`experience-${experience.id}`}
                                     key={experience.id}
                                 >
                                     <div className="p-3 relative">
@@ -109,7 +92,7 @@ const Experience = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </CommonTitle>
     );
 };
 

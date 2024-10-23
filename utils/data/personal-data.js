@@ -12,6 +12,6 @@ export const personalData = {
     linkedIn: "https://www.linkedin.com",
     twitter: "https://www.twitter.com",
     stackOverflow: "https://stackoverflow.com/",
-    devUsername: "",
+    devUsername: "htetaunglinn443",
     resume: "",
 };

@@ -1,1 +1,18 @@
-export const skillsData = [];
+export const skillsData = [
+    "HTML",
+    "CSS",
+    "Javascript",
+    "Bootstrap",
+    "Typescript",
+    "Angular",
+    "Vue",
+    "Nuxt JS",
+    "React",
+    "Next JS",
+    "Tailwind",
+    "MaterialUI",
+    "MySQL",
+    "Git",
+    "Docker",
+    "Nginx",
+];

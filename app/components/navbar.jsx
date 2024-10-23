@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import NavItem from "./navItem";
+import NavItem from "./common/navItem";
 const navbar = () => {
     return (
         <nav className="bg-transparent">
