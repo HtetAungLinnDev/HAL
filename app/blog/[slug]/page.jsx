@@ -16,7 +16,7 @@ async function getBlog(slug) {
 
 async function BlogDetails({ params }) {
     const slug = params.slug;
-    const blog = await getBlog(slug);
+    await getBlog(slug);
 
     return <div></div>;
 }
