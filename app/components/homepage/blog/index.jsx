@@ -11,9 +11,7 @@ const Blog = ({ blogs }) => {
                     .slice(0, 6)
                     .map(
                         (blog, i) =>
-                            blog.social_image && (
-                                <BlogCard blog={blog} key={i} />
-                            )
+                            blog.cover_image && <BlogCard blog={blog} key={i} />
                     )}
             </div>
             <div className="flex justify-center mt-5 lg:mt-12">

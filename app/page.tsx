@@ -1,3 +1,6 @@
+interface Blog {
+    cover_image?: string;
+}
 import HeroSection from "./components/homepage/hero-section";
 import AboutSection from "./components/homepage/about";
 import Experience from "./components/homepage/experience";
@@ -15,11 +18,10 @@ const getData = async () => {
     if (!res.ok) {
         throw new Error("Failed to fetch data");
     }
-
-    const data = await res.json();
-    const filtered = data;
-    // .filter((item) => item?.social_image)
-    // .sort(() => Math.random() - 0.5);
+    const data: Blog[] = await res.json();
+    const filtered = data
+        .filter((item: Blog) => item?.cover_image)
+        .sort(() => Math.random() - 0.5);
     return filtered;
 };
 export default async function Home() {

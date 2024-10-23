@@ -9,8 +9,8 @@ const BlogCard = ({ blog = {} }) => {
         <div className="border border-[#1d293a] hover:border-[#464c6a] transition-all duration-500 bg-[#1b203e] rounded-lg relative group">
             <div className="h-44 lg:h-52 w-auto cursor-pointer overflow-hidden rounded-t-lg">
                 <Image
-                    src={blog?.social_image}
-                    alt={blog?.social_image}
+                    src={blog?.cover_image}
+                    alt={blog?.cover_image}
                     height={1080}
                     width={900}
                     className="h-full w-full group-hover:scale-110 transition-all duration-300"
