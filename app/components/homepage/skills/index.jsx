@@ -1,7 +1,9 @@
+"use client";
 import { skillsData } from "@/utils/data/skills";
 import { skillsImage } from "@/utils/skill-image";
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
+import { Fade } from "react-awesome-reveal";
 const Skills = () => {
     return (
         <div
@@ -20,49 +22,65 @@ const Skills = () => {
                     <div className="h-[2px] bg-gradient-to-r from-transparent via-violet-500 to-transparent w-full"></div>
                 </div>
             </div>
-            <div className="text-pink-500 text-[14px] my-24 flex justify-center uppercase tracking-widest">
-                [ Skills ]
-            </div>
+            <Fade
+                direction="down"
+                delay={400}
+                cascade
+                damping={1e-1}
+                triggerOnce={true}
+            >
+                <div className="text-pink-500 text-[14px] my-24 flex justify-center uppercase tracking-widest">
+                    [ Skills ]
+                </div>
+            </Fade>
             <div className="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl opacity-20"></div>
             <div className="w-full mt-12">
-                <Marquee
-                    gradient={false}
-                    speed={80}
-                    pauseOnHover={true}
-                    pauseOnClick={true}
-                    delay={0}
-                    play={true}
-                    direction="left"
+                <Fade
+                    direction="up"
+                    delay={400}
+                    cascade
+                    damping={1e-1}
+                    triggerOnce={true}
                 >
-                    {skillsData.map((skill, id) => (
-                        <div
-                            key={id}
-                            className="w-36 min-w-fit h-fit flex flex-col items-center justify-center transition-all duration-500 m-3 sm:m-5 rounded-lg group relative cursor-pointer"
-                        >
-                            <div className="h-full w-full rounded-lg border border-[#1f223c] bg-[#11152c] shadow-gray-50 group-hover:border-violet-500 transition-all duration-500">
-                                <div className="flex -translate-y-[1px] justify-center">
-                                    <div className="w-3/4">
-                                        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-violet-500 to-transparent"></div>
+                    <Marquee
+                        gradient={false}
+                        speed={80}
+                        pauseOnHover={true}
+                        pauseOnClick={true}
+                        delay={0}
+                        play={true}
+                        direction="left"
+                    >
+                        {skillsData.map((skill, id) => (
+                            <div
+                                key={id}
+                                className="w-36 min-w-fit h-fit flex flex-col items-center justify-center transition-all duration-500 m-3 sm:m-5 rounded-lg group relative cursor-pointer"
+                            >
+                                <div className="h-full w-full rounded-lg border border-[#1f223c] bg-[#11152c] shadow-gray-50 group-hover:border-violet-500 transition-all duration-500">
+                                    <div className="flex -translate-y-[1px] justify-center">
+                                        <div className="w-3/4">
+                                            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-violet-500 to-transparent"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex flex-col items-center justify-center gap-3 p-6">
-                                    <div className="h-8 sm:h-10">
-                                        <Image
-                                            src={skillsImage(skill)?.src}
-                                            alt={skill}
-                                            width={40}
-                                            height={40}
-                                            className="h-full w-auto rounded-lg"
-                                        />
+                                    <div className="flex flex-col items-center justify-center gap-3 p-6">
+                                        <div className="h-8 sm:h-10">
+                                            <Image
+                                                src={skillsImage(skill)?.src}
+                                                alt={skill}
+                                                width={40}
+                                                height={40}
+                                                className="h-full w-auto rounded-lg"
+                                            />
+                                        </div>
+                                        <p className="text-sm sm:text-lg">
+                                            {skill}
+                                        </p>
                                     </div>
-                                    <p className="text-sm sm:text-lg">
-                                        {skill}
-                                    </p>
                                 </div>
                             </div>
-                        </div>
-                    ))}
-                </Marquee>
+                        ))}
+                    </Marquee>
+                </Fade>
             </div>
         </div>
     );

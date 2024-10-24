@@ -8,6 +8,7 @@ import Skills from "./components/homepage/skills";
 import Projects from "./components/homepage/projects";
 import Education from "./components/homepage/education";
 import Blog from "./components/homepage/blog";
+import ContactSection from "./components/homepage/contact";
 import { personalData } from "@/utils/data/personal-data";
 
 const getData = async () => {
@@ -35,6 +36,7 @@ export default async function Home() {
             <Projects />
             <Education />
             <Blog blogs={blogs} />
+            <ContactSection />
         </>
     );
 }

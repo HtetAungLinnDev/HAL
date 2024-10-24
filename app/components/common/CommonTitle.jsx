@@ -1,5 +1,8 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import { Fade } from "react-awesome-reveal";
+
 const CommonTitle = ({ children, title, id }) => {
     return (
         <div
@@ -19,9 +22,17 @@ const CommonTitle = ({ children, title, id }) => {
                 </div>
             </div>
             {title ? (
-                <div className="text-pink-500 text-[14px] my-24 flex justify-center uppercase tracking-widest">
-                    [ {title} ]
-                </div>
+                <Fade
+                    direction="down"
+                    delay={400}
+                    cascade
+                    damping={1e-1}
+                    triggerOnce={true}
+                >
+                    <div className="text-pink-500 text-[14px] my-24 flex justify-center uppercase tracking-widest">
+                        [ {title} ]
+                    </div>
+                </Fade>
             ) : (
                 ""
             )}
