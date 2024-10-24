@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CommonTitle from "@/app/components/common/CommonTitle";
 import { Fade } from "react-awesome-reveal";
 import Link from "next/link";
@@ -59,6 +59,14 @@ const ContactSection = () => {
             setIsSubmitting(false);
         }
     };
+    useEffect(() => {
+        if (responseMessage) {
+            const timer = setTimeout(() => {
+                setResponseMessage("");
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [responseMessage]);
 
     return (
         <CommonTitle id="contact" title="Contact">
@@ -151,7 +159,7 @@ const ContactSection = () => {
                                     </div>
                                 </div>
                                 {responseMessage && (
-                                    <p className="mt-4 text-sm text-[#d3d8e8]">
+                                    <p className="mt-4 text-sm text-[#36fe65]">
                                         {responseMessage}
                                     </p>
                                 )}

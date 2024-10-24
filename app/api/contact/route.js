@@ -53,12 +53,12 @@ export async function POST(req) {
         });
         return NextResponse.json({
             success: true,
-            message: "Message sent and saved to Google Sheets successfully!",
+            message: "Message sent successfully!",
         });
     } catch (error) {
         console.error("Error saving to Google Sheets:", error);
         return NextResponse.json(
-            { error: "An error occurred while saving to Google Sheets." },
+            { error: "An error occurred while saving." },
             { status: 500 }
         );
     }
