@@ -4,6 +4,9 @@
 
 :root {
     --foreground-rgb: rgb(211, 216, 232);
+
+    color-scheme: light;
+    --nextui-background: #10172d;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -86,7 +86,7 @@ const BackgroundMusic = () => {
         <div className="fixed bottom-7 right-5 !z-[10000]">
             <div
                 onClick={toggleCardVisibility}
-                className="cursor-pointer rounded-full dark:bg-slate-50 dark:text-gray-950 bg-slate-900 w-11 h-11 text-gray-100 shadow-lg flex justify-center align-middle pt-2"
+                className="cursor-pointer rounded-full bg-slate-900 w-11 h-11 text-gray-100 shadow-lg flex justify-center align-middle pt-2"
             >
                 <div>
                     {isCardVisible ? (
