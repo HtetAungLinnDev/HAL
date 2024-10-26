@@ -1,7 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Card, CardHeader, CardBody } from "@nextui-org/card";
-import { FaRegCirclePlay } from "react-icons/fa6";
+import { Card, CardBody } from "@nextui-org/card";
+import {
+    FaRegCirclePlay,
+    FaPause,
+    FaForward,
+    FaBackward,
+} from "react-icons/fa6";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@nextui-org/react";
@@ -13,50 +18,61 @@ const BackgroundMusic = () => {
     const [isCardVisible, setIsCardVisible] = useState(false);
     const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
     const audioUrls = [
-        "/audio/music3.mp3",
-        "/audio/music1.mp3",
-        "/audio/music2.mp3",
-        "/audio/music4.mp3",
+        { url: "/audio/music3.mp3", name: "Radio -Lu Hpring" },
+        { url: "/audio/music1.mp3", name: "ပျောက်ဆုံးနေသောနိဗ္ဗာန်ဘုံ" },
+        { url: "/audio/music2.mp3", name: "Mary - NEED" },
+        { url: "/audio/music4.mp3", name: "သီချင်းလေးကြားရင်" },
+        { url: "/audio/music5.mp3", name: "စိတ်ညစ်မှာစိုး" },
     ];
     const playNextAudio = () => {
         setCurrentAudioIndex((prevIndex) =>
             prevIndex === audioUrls.length - 1 ? 0 : prevIndex + 1
         );
     };
+    const playPreviousAudio = () => {
+        setCurrentAudioIndex((prevIndex) =>
+            prevIndex === 0 ? audioUrls.length - 1 : prevIndex - 1
+        );
+    };
     useEffect(() => {
         if (audioRef.current) {
-            audioRef.current.src = audioUrls[currentAudioIndex];
-            audioRef.current.volume = 0.5;
-            audioRef.current.loop = false;
-            audioRef.current
-                .play()
-                .then(() => setIsPlaying(true))
-                .catch((error) => {
-                    console.error("Autoplay was prevented:", error);
-                });
-        }
-    }, []);
-    useEffect(() => {
-        if (isPlaying && audioRef.current) {
+            audioRef.current.src = audioUrls[currentAudioIndex].url;
             audioRef.current.volume = volume;
-
+            audioRef.current.load();
+            audioRef.current.loop = false;
+            audioRef.current.play();
+            setIsPlaying(true);
+        }
+    }, [currentAudioIndex]);
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.volume = volume;
             const handleAudioEnd = () => {
                 playNextAudio();
             };
-
+            const updateTime = () => {
+                setCurrentTime(audioRef.current.currentTime);
+                setDuration(audioRef.current.duration);
+            };
             audioRef.current.addEventListener("ended", handleAudioEnd);
-
+            audioRef.current.addEventListener("timeupdate", updateTime);
             return () => {
                 if (audioRef.current) {
                     audioRef.current.removeEventListener(
                         "ended",
                         handleAudioEnd
                     );
+                    audioRef.current.removeEventListener(
+                        "timeupdate",
+                        updateTime
+                    );
                 }
             };
         }
-    }, [currentAudioIndex, isPlaying]);
+    }, [isPlaying, volume]);
     const handleVolumeChange = (e) => {
         const newVolume = parseFloat(e.target.value);
         setVolume(newVolume);
@@ -64,12 +80,25 @@ const BackgroundMusic = () => {
             audioRef.current.volume = newVolume;
         }
     };
+    const togglePlayPause = () => {
+        if (audioRef.current) {
+            if (isPlaying) {
+                audioRef.current.pause();
+            } else {
+                audioRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
+    const handleProgressChange = (e) => {
+        const newTime = parseFloat(e.target.value);
+        if (audioRef.current) {
+            audioRef.current.currentTime = newTime;
+            setCurrentTime(newTime);
+        }
+    };
     const toggleCardVisibility = () => {
         setIsCardVisible((prev) => !prev);
-        if (audioRef.current && !isPlaying) {
-            audioRef.current.volume = volume;
-            audioRef.current.play().then(() => setIsPlaying(true));
-        }
     };
     const handleClickOutside = (event) => {
         if (cardRef.current && !cardRef.current.contains(event.target)) {
@@ -82,6 +111,11 @@ const BackgroundMusic = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+    const formatTime = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    };
     return (
         <div className="fixed bottom-7 right-5 !z-[10000]">
             <div
@@ -110,29 +144,24 @@ const BackgroundMusic = () => {
                             ref={cardRef}
                             isBlurred
                             shadow="lg"
-                            className="p-4 bg-[#10172d] text-gray-100"
+                            className="p-4 bg-[#10172d] text-gray-100 w-[360px]"
                         >
-                            <CardHeader>
-                                <div>
-                                    <h1>Audio Volume Control</h1>
-                                    <div>
-                                        <input
-                                            type="range"
-                                            min="0"
-                                            max="1"
-                                            step="0.01"
-                                            value={volume}
-                                            className="bg-red-500"
-                                            onChange={handleVolumeChange}
-                                            style={{ width: "200px" }}
-                                        />
-                                    </div>
-                                </div>
-                            </CardHeader>
                             <CardBody>
-                                <div className="flex justify-center mt-4">
+                                <h1 className="text-center">Music Player</h1>
+                                <p>Volume</p>
+                                <div className="flex flex-col justify-between items-center my-4">
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="1"
+                                        step="0.01"
+                                        value={volume}
+                                        onChange={handleVolumeChange}
+                                        className="w-60"
+                                    />
                                     <CircularProgress
-                                        aria-label="Loading..."
+                                        className="my-3"
+                                        aria-label="Volume"
                                         size="lg"
                                         value={Math.round(volume * 100)}
                                         color={
@@ -144,6 +173,49 @@ const BackgroundMusic = () => {
                                         }
                                         showValueLabel={true}
                                     />
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <p className="text-center mb-4">
+                                        {audioUrls[currentAudioIndex].name}
+                                    </p>
+                                    <div className="flex items-center space-x-2">
+                                        <FaBackward
+                                            className="cursor-pointer"
+                                            onClick={playPreviousAudio}
+                                        />
+                                        {isPlaying ? (
+                                            <FaPause
+                                                className="cursor-pointer"
+                                                onClick={togglePlayPause}
+                                            />
+                                        ) : (
+                                            <FaRegCirclePlay
+                                                className="cursor-pointer"
+                                                onClick={togglePlayPause}
+                                            />
+                                        )}
+                                        <FaForward
+                                            className="cursor-pointer"
+                                            onClick={playNextAudio}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex justify-between items-center mt-4">
+                                    <span>{formatTime(currentTime)}</span>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max={duration || 0}
+                                        step="1"
+                                        value={currentTime}
+                                        onChange={handleProgressChange}
+                                        className="w-60"
+                                    />
+                                    <span>
+                                        {!isNaN(duration)
+                                            ? formatTime(duration)
+                                            : "0:00"}
+                                    </span>
                                 </div>
                             </CardBody>
                         </Card>
