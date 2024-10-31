@@ -1,44 +1,20 @@
 export const offers = [
     {
         id: 1,
-        title: "Edcation 1",
-        duration: "Learn More",
-        service:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. ",
+        title: "2018(High School)",
+        duration: "2005 - 2016",
+        service: "Ye Kyi Pauk Basic Edication Hight School",
     },
     {
         id: 2,
-        title: "Edcation 2",
-        duration: "Learn More",
-        service:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. ",
+        title: "Physics (Second Years)",
+        duration: "Since 2018",
+        service: "in Mandalar University",
     },
     {
         id: 3,
-        title: "Edcation 3",
-        duration: "Learn More",
-        service:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. ",
-    },
-    {
-        id: 4,
-        title: "Edcation 4",
-        duration: "Learn More",
-        service:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. ",
-    },
-    {
-        id: 5,
-        title: "Edcation 5",
-        duration: "Learn More",
-        service:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. ",
-    },
-    {
-        id: 6,
-        title: "Edcation 6",
-        duration: "Learn More",
-        service:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. ",
+        title: "Junior Dev",
+        duration: "2023 - Current",
+        service: "PHP Developer",
     },
 ];

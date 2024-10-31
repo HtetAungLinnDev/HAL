@@ -40,7 +40,7 @@ const AboutSection = () => {
                         damping={1e-1}
                         triggerOnce={true}
                     >
-                        <div className="my-6 flex items-center gap-5">
+                        <div className="my-6 flex items-center gap-5 pl-4">
                             <Link
                                 href={personalData.github}
                                 target="_blank"

@@ -61,3 +61,25 @@ body {
 .sticky-card {
     top: calc(var(--index) * 4rem);
 }
+
+::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+}
+
+/* The track (background) */
+::-webkit-scrollbar-track {
+    background: #0d1224; /* background color for the scrollbar track */
+}
+
+/* The handle (scroll thumb) */
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* color of the scroll thumb */
+    border-radius: 6px; /* rounded corners */
+    border: 2px solid #0d1224; /* adds a border around the thumb */
+    transition: ease-in-out 0.3s;
+}
+
+/* Hover effect on the scroll thumb */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* color when hovered */
+}

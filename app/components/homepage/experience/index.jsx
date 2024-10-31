@@ -38,7 +38,7 @@ const Experience = () => {
                                         </div>
                                         <div className="flex items-center gap-x-8 px-3 py-2">
                                             <Image
-                                                src="/placeholder.png"
+                                                src={"/cert/" + award.img}
                                                 width={80}
                                                 height={40}
                                                 alt="Awards"
@@ -87,8 +87,15 @@ const Experience = () => {
                                             </div>
                                             <div className="flex items-center gap-x-8 px-3 py-2">
                                                 <Image
-                                                    src="/img-1.png"
-                                                    width={80}
+                                                    src={
+                                                        experience.img
+                                                            ? `${
+                                                                  "/cert/" +
+                                                                  experience.img
+                                                              }`
+                                                            : "/img-1.png"
+                                                    }
+                                                    width={40}
                                                     height={40}
                                                     alt="Experience"
                                                     className="hover:scale-125 rounded-xl"

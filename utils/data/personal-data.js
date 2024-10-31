@@ -8,10 +8,10 @@ export const personalData = {
     phone: "+959779009919",
     address: "Mandalay, Myanmar",
     github: "https://www.github.com/HtetAungLinn443",
-    facebook: "https://www.facebook.com",
+    facebook: "https://www.facebook.com/HtetAungLinnDev",
     linkedIn: "https://www.linkedin.com/HtetAungLinn443",
     twitter: "https://www.twitter.com",
     stackOverflow: "https://stackoverflow.com/users/21542467/htet-aung-linn",
     devUsername: "htetaunglinn443",
-    resume: "",
+    resume: "HtetAungLinn.pdf",
 };
