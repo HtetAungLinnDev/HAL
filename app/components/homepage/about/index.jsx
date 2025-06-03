@@ -85,7 +85,7 @@ const AboutSection = () => {
                             width={470}
                             height={630}
                             alt="Profile"
-                            className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 cursor-pointer"
+                            className="rounded-lg transition-all duration-1000 cursor-pointer"
                         />
                     </Fade>
                 </div>

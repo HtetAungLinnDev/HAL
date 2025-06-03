@@ -13,8 +13,8 @@ export const offers = [
   },
   {
     id: 3,
-    title: "Junior Dev",
-    duration: "2023 - Current",
-    service: "PHP Developer",
+    title: "Web Developer",
+    duration: "2022 - Current",
+    service: "FullStack Developer",
   },
 ];
