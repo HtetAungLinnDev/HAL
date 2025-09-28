@@ -72,10 +72,17 @@ import vuetifyjs from "/public/svg/skills/vuetifyjs.svg";
 import webix from "/public/svg/skills/webix.svg";
 import wolframalpha from "/public/svg/skills/wolframalpha.svg";
 import wordpress from "/public/svg/skills/wordpress.svg";
+import electron from "/public/svg/skills/electron.svg";
+import laravel from "/public/svg/skills/laravel.svg";
+
 
 export const skillsImage = (skill) => {
   const skillID = skill.toLowerCase();
   switch (skillID) {
+    case "laravel":
+      return laravel;
+    case "electron":
+      return electron;
     case "gcp":
       return gcp;
     case "html":

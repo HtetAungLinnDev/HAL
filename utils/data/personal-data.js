@@ -1,6 +1,6 @@
 export const personalData = {
   name: "Htet Aung Linn",
-  profile: "/profile.png",
+  profile: "/profile.jpg",
   designation: "Mid Level Developer",
   description: "Web Developer | 3+ Years Experience Skilled in building scalable, high- performance web applications using PHP (Laravel - Advanced), Vue.js / Nuxt.js(Advanced), and React / Next.js(Basic).Proficient in Node.js(Express.js) and MongoDB(Basic). Successfully delivered 6 Japan and 4 Myanmar projects.Experienced in server management and DevOps, including DigitalOcean, Linux(Ubuntu & others), Docker, Apache2, and Nginx.",
   email: "htetaunglinn443@gmail.com",
