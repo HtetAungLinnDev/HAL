@@ -35,6 +35,7 @@ export default function BrowserFrame({
                         src={image}
                         alt={alt}
                         fill
+                        quality={90}
                         sizes={sizes}
                         priority={priority}
                         style={{ objectPosition: position }}

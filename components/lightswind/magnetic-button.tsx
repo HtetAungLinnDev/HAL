@@ -47,10 +47,7 @@ export function MagneticButton({ children, href, strength = 0.3, radius = 80, cl
         setIsHovered(false);
     };
 
-    const classes = cn(
-        "relative inline-flex items-center justify-center overflow-hidden rounded-lg font-semibold tracking-tight transition-colors",
-        className,
-    );
+    const classes = cn("relative inline-flex items-center justify-center overflow-hidden rounded-lg font-semibold tracking-tight transition-colors", className);
     const inner = (
         <>
             <motion.span

@@ -188,6 +188,24 @@ export const certifications = [
 ];
 
 export const journeyPhotos = [
-    "sg_group1.jpg", "photo_2025-09-28_20-08-05.jpg", "sg_group2.jpg", "photo_2025-09-28_20-09-31.jpg",
-    "boss_bathday_party.jpg", "photo_2025-09-28_20-09-54.jpg", "sg_group3.jpg", "photo_2025-09-28_20-09-52.jpg",
+    "sg_group1.jpg",
+    "photo_2025-09-28_20-08-05.jpg",
+    "sg_group2.jpg",
+    "photo_2025-09-28_20-09-31.jpg",
+    "boss_bathday_party.jpg",
+    "photo_2025-09-28_20-09-54.jpg",
+    "sg_group3.jpg",
+    "photo_2025-09-28_20-09-52.jpg",
+    "boss_bathday_party2.jpg",
+    "photo_2025-09-28_20-09-35.jpg",
+    "photo_2025-09-28_20-09-37.jpg",
+    "photo_2025-09-28_20-09-38.jpg",
+    "photo_2025-09-28_20-09-40.jpg",
+    "photo_2025-09-28_20-09-41.jpg",
+    "photo_2025-09-28_20-09-42.jpg",
+    "photo_2025-09-28_20-09-43.jpg",
+    "photo_2025-09-28_20-09-45.jpg",
+    "photo_2025-09-28_20-09-46.jpg",
+    "photo_2025-09-28_20-09-48.jpg",
+    "photo_2025-09-28_20-09-49.jpg",
 ];

@@ -2,6 +2,8 @@ import Image from "next/image";
 import SectionHeader from "@/components/site/section-header";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { whatIDo } from "@/utils/data/site";
+import { GlowingCards } from "@/components/lightswind/glowing-cards";
+import { glowCard } from "@/components/lightswind/glowing-card";
 
 export default function About() {
     return (
@@ -21,6 +23,7 @@ export default function About() {
                                 width={1536}
                                 height={1024}
                                 loading="lazy"
+                                quality={90}
                                 sizes="(min-width: 1152px) 1104px, calc(100vw - 40px)"
                                 className="h-auto w-full transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.02]"
                             />
@@ -39,8 +42,8 @@ export default function About() {
                         </p>
                         <p className="text-ink-3">
                             My work spans the entire software development lifecycle, from designing system architecture and developing responsive user
-                            interfaces to building robust backend services, managing databases, and deploying applications. I enjoy turning complex
-                            business requirements into practical, maintainable, and efficient software solutions.
+                            interfaces to building robust backend services, managing databases, and deploying applications. I enjoy turning complex business
+                            requirements into practical, maintainable, and efficient software solutions.
                         </p>
                     </Reveal>
                     <Reveal as="aside" delay={0.1} className="rounded-2xl border border-line bg-surface p-7">
@@ -66,22 +69,30 @@ export default function About() {
                 <Reveal>
                     <h3 className="mt-20 font-display text-2xl font-semibold text-ink">What I do</h3>
                 </Reveal>
-                <Stagger className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {whatIDo.map((w) => (
-                        <StaggerItem
-                            key={w.title}
-                            className="group rounded-2xl border border-line bg-surface p-6 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-mint/30"
-                        >
-                            <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-mint/10 text-mint transition-transform duration-300 group-hover:scale-110">
-                                <svg aria-hidden="true" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                                    <path d={w.icon} />
-                                </svg>
-                            </span>
-                            <h4 className="mt-4 font-display text-lg font-semibold text-ink">{w.title}</h4>
-                            <p className="mt-2 text-sm leading-relaxed text-ink-3">{w.text}</p>
-                        </StaggerItem>
-                    ))}
-                </Stagger>
+                <GlowingCards>
+                    <Stagger className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        {whatIDo.map((w, i) => (
+                            <StaggerItem key={w.title} {...glowCard(i % 2 ? "#8B93FF" : "#34E0B0", "group rounded-2xl border border-line bg-surface p-6")}>
+                                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-mint/10 text-mint transition-transform duration-300 group-hover:scale-110">
+                                    <svg
+                                        aria-hidden="true"
+                                        className="h-5 w-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="1.6"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d={w.icon} />
+                                    </svg>
+                                </span>
+                                <h4 className="mt-4 font-display text-lg font-semibold text-ink">{w.title}</h4>
+                                <p className="mt-2 text-sm leading-relaxed text-ink-3">{w.text}</p>
+                            </StaggerItem>
+                        ))}
+                    </Stagger>
+                </GlowingCards>
             </div>
         </section>
     );
