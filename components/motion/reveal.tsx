@@ -12,17 +12,7 @@ export const fadeUp: Variants = {
 type Tag = "div" | "li" | "ul" | "article" | "header" | "aside" | "ol";
 
 /** Fades and slides its content in once it scrolls into view (transform + opacity only). */
-export function Reveal({
-    children,
-    className,
-    delay = 0,
-    as = "div",
-}: {
-    children: React.ReactNode;
-    className?: string;
-    delay?: number;
-    as?: Tag;
-}) {
+export function Reveal({ children, className, delay = 0, as = "div" }: { children: React.ReactNode; className?: string; delay?: number; as?: Tag }) {
     const M = motion[as];
     return (
         <M
@@ -38,17 +28,7 @@ export function Reveal({
 }
 
 /** Container that staggers its <StaggerItem> children as it scrolls into view. */
-export function Stagger({
-    children,
-    className,
-    as = "ul",
-    stagger = 0.08,
-}: {
-    children: React.ReactNode;
-    className?: string;
-    as?: Tag;
-    stagger?: number;
-}) {
+export function Stagger({ children, className, as = "ul", stagger = 0.08 }: { children: React.ReactNode; className?: string; as?: Tag; stagger?: number }) {
     const M = motion[as];
     return (
         <M
@@ -63,10 +43,20 @@ export function Stagger({
     );
 }
 
-export function StaggerItem({ children, className, as = "li" }: { children: React.ReactNode; className?: string; as?: Tag }) {
+export function StaggerItem({
+    children,
+    className,
+    as = "li",
+    style,
+}: {
+    children: React.ReactNode;
+    className?: string;
+    as?: Tag;
+    style?: React.CSSProperties;
+}) {
     const M = motion[as];
     return (
-        <M className={className} variants={fadeUp}>
+        <M className={className} style={style} variants={fadeUp}>
             {children}
         </M>
     );

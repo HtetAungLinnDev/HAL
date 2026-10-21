@@ -1,11 +1,11 @@
 export const personal = {
     name: "Htet Aung Linn",
     title: "Full-Stack Software Engineer",
-    subtitle: "Senior Developer at Ravus Law · CTO at PhiLo POS",
+    subtitle: "Senior Developer at Ravus Law · Co-Founder & CTO at PhiLo POS",
     email: "htetaunglinn443@gmail.com",
     phone: "+959779009919",
     phoneDisplay: "+95 9 779 009 919",
-    location: "Yangon, Myanmar",
+    location: "Mandalay, Myanmar",
     resume: "/HtetAungLinn.pdf",
     profile: "/profile.jpg",
 };
@@ -37,15 +37,22 @@ export const whatIDo = [
 
 export const featuredProject = {
     name: "PhiLo POS",
-    role: "CTO",
+    role: "Co-Founder & CTO",
     tagline: "Point-of-sale and inventory for shops and restaurants in Myanmar.",
     description: "A business software platform focused on sales management, inventory workflows, reporting, and operational efficiency.",
-    features: ["Sales & checkout", "Inventory & stock transfer", "Multi-branch", "Reports", "Kitchen printers & KDS", "Barcode printing"],
+    features: [
+        "Sales & checkout",
+        "Inventory & stock transfer",
+        "Multi-branch",
+        "Reports",
+        "Kitchen display (KDS) & barcode printing",
+        "Kitchen & receipt printing — laser and thermal printers",
+    ],
     apps: [
-        { name: "PhiLo POS app", platforms: "Android · Web" },
-        { name: "KDS app", platforms: "Android" },
-        { name: "PhiLo POS Manager", platforms: "Android · iOS" },
-        { name: "Admin panel", platforms: "Web" },
+        { name: "PhiLo POS app", platforms: ["Android", "iOS", "Desktop (Windows)", "macOS", "Web"] },
+        { name: "KDS app", platforms: ["Android"] },
+        { name: "PhiLo POS Manager", platforms: ["Android", "iOS"] },
+        { name: "Admin panel", platforms: ["Web"] },
     ],
     stack: ["PHP API", "TypeScript"],
     url: "https://philo.asia",
@@ -163,7 +170,7 @@ export const skillGroups: { title: string; items: { name: string; icon?: string 
 
 export const experience = [
     { role: "Senior Developer", org: "Ravus Law", text: "Professional software development involving application engineering, technical problem-solving, and maintainable software systems." },
-    { role: "Chief Technology Officer (CTO)", org: "PhiLo POS", link: { href: "https://philo.asia", label: "philo.asia" }, text: "A business software platform focused on sales management, inventory workflows, reporting, and operational efficiency." },
+    { role: "Co-Founder & Chief Technology Officer (CTO)", org: "PhiLo POS", link: { href: "https://philo.asia", label: "philo.asia" }, text: "A business software platform focused on sales management, inventory workflows, reporting, and operational efficiency." },
     { role: "PHP Internship", org: "Softguide", date: "Oct 2023" },
 ];
 
@@ -181,6 +188,24 @@ export const certifications = [
 ];
 
 export const journeyPhotos = [
-    "sg_group1.jpg", "photo_2025-09-28_20-08-05.jpg", "sg_group2.jpg", "photo_2025-09-28_20-09-31.jpg",
-    "boss_bathday_party.jpg", "photo_2025-09-28_20-09-54.jpg", "sg_group3.jpg", "photo_2025-09-28_20-09-52.jpg",
+    "sg_group1.jpg",
+    "photo_2025-09-28_20-08-05.jpg",
+    "sg_group2.jpg",
+    "photo_2025-09-28_20-09-31.jpg",
+    "boss_bathday_party.jpg",
+    "photo_2025-09-28_20-09-54.jpg",
+    "sg_group3.jpg",
+    "photo_2025-09-28_20-09-52.jpg",
+    "boss_bathday_party2.jpg",
+    "photo_2025-09-28_20-09-35.jpg",
+    "photo_2025-09-28_20-09-37.jpg",
+    "photo_2025-09-28_20-09-38.jpg",
+    "photo_2025-09-28_20-09-40.jpg",
+    "photo_2025-09-28_20-09-41.jpg",
+    "photo_2025-09-28_20-09-42.jpg",
+    "photo_2025-09-28_20-09-43.jpg",
+    "photo_2025-09-28_20-09-45.jpg",
+    "photo_2025-09-28_20-09-46.jpg",
+    "photo_2025-09-28_20-09-48.jpg",
+    "photo_2025-09-28_20-09-49.jpg",
 ];
