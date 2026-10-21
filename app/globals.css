@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    color-scheme: dark;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+}
+
+body {
+    background: #0a0e17;
+    color: #c5ccda;
+}
+
+:focus-visible {
+    outline: 2px solid #34e0b0;
+    outline-offset: 3px;
+}
+
+.grid-bg {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 30%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Lightswind sliding-logo-marquee (moved from an inline <style> to avoid a hydration text mismatch) */
+.lw-marquee { --duration: calc(200s / var(--speed)); }
+@keyframes lw-marquee-x { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+.lw-marquee-inner { height: 100%; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 12% 88%, transparent); mask: linear-gradient(90deg, transparent, #000 12% 88%, transparent); }
+.lw-marquee-list { display: flex; width: max-content; gap: var(--gap); height: 100%; align-items: center; margin: 0; padding: 0; list-style: none;
+    animation: lw-marquee-x var(--duration) linear infinite; animation-play-state: paused; will-change: transform; }
+.lw-marquee[data-running="true"] .lw-marquee-list { animation-play-state: running; }
+@media (prefers-reduced-motion: reduce) { .lw-marquee-list { animation: none; } }
+
