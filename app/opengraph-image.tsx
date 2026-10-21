@@ -144,7 +144,7 @@ export default async function Image() {
                             <div style={{ display: "flex", width: 14, height: 14, borderRadius: 999, backgroundColor: colors.mint, marginRight: 14, boxShadow: "0 0 0 6px rgba(52,224,176,0.18)" }} />
                             {personal.location}
                             <span style={{ color: colors.ink3, margin: "0 14px" }}>·</span>
-                            Senior Developer at Ravus Law
+                            Full Stack Developer at Ravus Law Chambers
                         </div>
                         <div style={{ display: "flex", flexWrap: "wrap", marginTop: 34 }}>
                             {chips.map((c) => (

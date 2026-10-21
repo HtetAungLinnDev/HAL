@@ -37,7 +37,7 @@ export default function About() {
                             user-focused software solutions.
                         </p>
                         <p>
-                            Currently, I work as a Senior Developer at Ravus Law and serve as the Co-Founder and Chief Technology Officer (CTO) of PhiLo POS, a
+                            Currently, I work as a Full Stack Developer at Ravus Law Chambers (remote, Singapore) and serve as the Co-Founder and Chief Technology Officer (CTO) of PhiLo POS, a
                             point-of-sale software platform designed to help businesses streamline their daily operations.
                         </p>
                         <p className="text-ink-3">

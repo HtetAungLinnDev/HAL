@@ -35,7 +35,7 @@ export default function Hero() {
                         <span className="bg-gradient-to-r from-ink via-ink to-mint bg-clip-text text-transparent">Software Engineer</span>
                     </motion.h1>
                     <motion.p variants={item} className="mt-5 text-lg font-medium text-mint">
-                        <span className="whitespace-nowrap">Senior Developer at Ravus Law</span> <span className="text-ink-3">·</span>{" "}
+                        <span className="whitespace-nowrap">Full Stack Developer at Ravus Law Chambers</span> <span className="text-ink-3">·</span>{" "}
                         <span className="whitespace-nowrap">Co-Founder &amp; CTO at PhiLo POS</span>
                     </motion.p>
                     <motion.p variants={item} className="mt-6 max-w-xl text-[17px] leading-relaxed text-ink-2">
@@ -79,7 +79,7 @@ export default function Hero() {
                     >
                         <li>Full-Stack Developer</li>
                         <li aria-hidden="true">/</li>
-                        <li>Senior Developer</li>
+                        <li>Full Stack Developer</li>
                         <li aria-hidden="true">/</li>
                         <li>Co-Founder &amp; CTO</li>
                     </motion.ul>
@@ -135,8 +135,8 @@ export default function Hero() {
                                     <dd className="font-mono text-[11px] text-ink-3">PhiLo POS</dd>
                                 </div>
                                 <div className="flex items-center justify-between gap-3 rounded-lg bg-white/[0.04] px-3 py-2">
-                                    <dt className="text-ink">Senior Developer</dt>
-                                    <dd className="font-mono text-[11px] text-ink-3">Ravus Law</dd>
+                                    <dt className="text-ink">Full Stack Developer</dt>
+                                    <dd className="font-mono text-[11px] text-ink-3">Ravus Law Chambers</dd>
                                 </div>
                             </dl>
                             <p className="mt-3 inline-flex items-center gap-2 text-xs text-ink-2">

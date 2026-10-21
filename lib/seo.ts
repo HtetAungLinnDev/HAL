@@ -6,7 +6,7 @@ export const siteName = personal.name;
 export const defaultTitle = `${personal.name} · Full-Stack Developer & CTO of PhiLo POS`;
 export const shortTitle = "Full-Stack Developer · Co-Founder & CTO, PhiLo POS";
 export const description =
-    "Htet Aung Linn is a Full-Stack Software Developer in Mandalay, Myanmar, Co-Founder & CTO of PhiLo POS and Senior Developer at Ravus Law. " +
+    "Htet Aung Linn is a Full-Stack Software Developer in Mandalay, Myanmar, Co-Founder & CTO of PhiLo POS and Full Stack Developer at Ravus Law Chambers. " +
     "React, Next.js, Vue/Nuxt, TypeScript, PHP/Laravel, Node/NestJS, MySQL/PostgreSQL, AWS, Docker, React Native and Electron.";
 
 export const keywords = [
@@ -17,8 +17,8 @@ export const keywords = [
     "Web Developer Mandalay",
     "PhiLo POS",
     "Co-Founder & CTO",
-    "Ravus Law",
-    "Senior Developer",
+    "Ravus Law Chambers",
+    "Full Stack Developer",
     "React",
     "Next.js",
     "Vue.js",
@@ -50,7 +50,7 @@ export function homeJsonLd() {
     const philoId = `${siteUrl}/#org-philo-pos`;
     const ravusId = `${siteUrl}/#org-ravus-law`;
     const knowsAbout = Array.from(new Set(skillGroups.flatMap((g) => g.items.map((i) => i.name))));
-    const ravus = experience.find((e) => e.org === "Ravus Law");
+    const ravus = experience.find((e) => e.org.includes("Ravus"));
     const university = education.find((e) => /university/i.test(e.org));
     const [city, country] = personal.location.split(",").map((s) => s.trim());
 
@@ -113,12 +113,12 @@ export function homeJsonLd() {
                 logo: brandLogoUrl,
                 image: brandLogoUrl,
                 email: `mailto:${personal.email}`,
-                jobTitle: ["Full-Stack Software Developer", "Co-Founder & Chief Technology Officer (CTO)", "Senior Developer"],
+                jobTitle: ["Full-Stack Software Developer", "Co-Founder & Chief Technology Officer (CTO)", "Full Stack Developer"],
                 description,
                 worksFor: [{ "@id": philoId }, { "@id": ravusId }],
                 hasOccupation: [
                     { "@type": "Occupation", name: "Co-Founder & Chief Technology Officer (CTO)", description: featuredProject.description },
-                    { "@type": "Occupation", name: "Senior Developer", ...(ravus?.text ? { description: ravus.text } : {}) },
+                    { "@type": "Occupation", name: "Full Stack Developer", ...(ravus?.text ? { description: ravus.text } : {}) },
                 ],
                 address: { "@type": "PostalAddress", addressLocality: city, addressCountry: country === "Myanmar" ? "MM" : country },
                 ...(university ? { alumniOf: { "@type": "CollegeOrUniversity", name: university.org } } : {}),
@@ -126,7 +126,7 @@ export function homeJsonLd() {
                 sameAs,
             },
             { "@type": "Organization", "@id": philoId, name: "PhiLo POS", url: featuredProject.url, founder: { "@id": personId } },
-            { "@type": "Organization", "@id": ravusId, name: "Ravus Law" },
+            { "@type": "Organization", "@id": ravusId, name: "Ravus Law Chambers" },
             {
                 "@type": "ItemList",
                 "@id": `${siteUrl}/#projects`,

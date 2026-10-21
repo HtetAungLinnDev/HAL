@@ -78,7 +78,7 @@ export function ThreeDImageCarousel({
             aria-roledescription="carousel"
             aria-label={label}
             tabIndex={0}
-            className={cn("cascade relative outline-none focus-visible:ring-2 focus-visible:ring-mint/60 rounded-2xl", className)}
+            className={cn("cascade cascade--journey relative px-2 py-6 outline-none focus-visible:ring-2 focus-visible:ring-mint/60 sm:px-6 sm:py-10", className)}
             onKeyDown={(e) => {
                 if (e.key === "ArrowRight") {
                     e.preventDefault();
@@ -128,7 +128,7 @@ export function ThreeDImageCarousel({
                                         alt={off === 0 ? s.alt : ""}
                                         fill
                                         quality={90}
-                                        sizes="(min-width: 1100px) 420px, (min-width: 576px) 340px, 240px"
+                                        sizes="(min-width: 991px) 280px, (min-width: 576px) 240px, 200px"
                                         className="object-cover"
                                         draggable={false}
                                     />
