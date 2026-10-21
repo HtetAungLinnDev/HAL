@@ -40,6 +40,9 @@ export const keywords = [
 export const sameAs = socials.map((s) => s.href);
 const abs = (path: string) => new URL(path, `${siteUrl}/`).toString();
 
+/** Primary brand mark for metadata and structured data (512×512 PNG). */
+export const brandLogoUrl = abs("/brand/hal-logo-512.png");
+
 /** schema.org graph for the home page: WebSite, ProfilePage, Person, organisations and projects. */
 export function homeJsonLd() {
     const personId = `${siteUrl}/#person`;
@@ -87,6 +90,8 @@ export function homeJsonLd() {
                 name: siteName,
                 description,
                 inLanguage: "en",
+                logo: brandLogoUrl,
+                image: brandLogoUrl,
                 publisher: { "@id": personId },
             },
             {
@@ -105,7 +110,8 @@ export function homeJsonLd() {
                 "@id": personId,
                 name: personal.name,
                 url: `${siteUrl}/`,
-                image: abs(personal.profile),
+                logo: brandLogoUrl,
+                image: brandLogoUrl,
                 email: `mailto:${personal.email}`,
                 jobTitle: ["Full-Stack Software Developer", "Co-Founder & Chief Technology Officer (CTO)", "Senior Developer"],
                 description,

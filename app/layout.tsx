@@ -39,8 +39,6 @@ export const metadata: Metadata = {
         lastName: "Linn",
     },
     twitter: { card: "summary_large_image", title: defaultTitle, description },
-    // app/favicon.ico is picked up automatically; the 1024px logo doubles as the Apple touch icon.
-    icons: { apple: [{ url: "/logo.png", sizes: "1024x1024", type: "image/png" }] },
 };
 
 export const viewport: Viewport = {

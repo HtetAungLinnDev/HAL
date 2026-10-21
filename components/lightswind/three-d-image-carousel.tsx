@@ -9,13 +9,13 @@
  * - No min-width (it overflowed phones); responsive slide sizes instead.
  * - next/image with quality 90; only slides near the active one mount an image, so 20 photos
  *   don't download at once.
- * - Accessible: real <button>s, arrow-key navigation, a pause/play control for autoplay
- *   (WCAG 2.2.2), off-screen slides hidden from assistive tech, polite live status.
+ * - Accessible: real <button>s, arrow-key navigation, off-screen slides hidden from assistive
+ *   tech, polite live status.
  * - Autoplay pauses on hover/focus, when off-screen, and never runs with reduced motion.
  */
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/components/lib/utils";
 
@@ -42,7 +42,6 @@ export function ThreeDImageCarousel({
 }) {
     const total = slides.length;
     const [active, setActive] = useState(0);
-    const [playing, setPlaying] = useState(autoplay);
     const [hovered, setHovered] = useState(false);
     const [visible, setVisible] = useState(false);
     const reduce = useReducedMotion();
@@ -60,10 +59,10 @@ export function ThreeDImageCarousel({
     }, []);
 
     useEffect(() => {
-        if (!playing || reduce || hovered || !visible || total < 2) return;
+        if (!autoplay || reduce || hovered || !visible || total < 2) return;
         const id = window.setInterval(() => go(1), delay * 1000);
         return () => window.clearInterval(id);
-    }, [playing, reduce, hovered, visible, total, delay, go]);
+    }, [autoplay, reduce, hovered, visible, total, delay, go]);
 
     const offsetOf = (i: number) => {
         let d = i - active;
@@ -147,19 +146,9 @@ export function ThreeDImageCarousel({
                 <ChevronRight className="h-5 w-5" aria-hidden="true" />
             </button>
 
-            <div className="mt-4 flex items-center justify-center gap-3">
-                <button
-                    type="button"
-                    onClick={() => setPlaying((p) => !p)}
-                    aria-label={playing ? "Pause autoplay" : "Start autoplay"}
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-line bg-surface text-ink-2 transition-colors hover:border-mint/50 hover:text-ink motion-reduce:hidden"
-                >
-                    {playing ? <Pause className="h-3.5 w-3.5" aria-hidden="true" /> : <Play className="h-3.5 w-3.5" aria-hidden="true" />}
-                </button>
-                <p className="font-mono text-xs text-ink-3" aria-live="polite">
-                    {String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-                </p>
-            </div>
+            <p className="mt-4 text-center font-mono text-xs text-ink-3" aria-live="polite">
+                {String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+            </p>
         </div>
     );
 }
