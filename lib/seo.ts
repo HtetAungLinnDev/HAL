@@ -72,7 +72,7 @@ export function homeJsonLd() {
             name: p.name,
             headline: p.tagline,
             description: p.description,
-            url: p.url,
+            ...(p.url ? { url: p.url } : {}),
             ...(p.image ? { image: abs(p.image) } : {}),
             ...(p.stack ? { keywords: p.stack.join(", ") } : {}),
             locationCreated: { "@type": "Country", name: p.market },

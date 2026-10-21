@@ -69,9 +69,12 @@ export default function SiteHeader() {
                 <div className="flex items-center gap-2">
                     <a
                         href={personal.resume}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="hidden rounded-lg bg-mint px-4 py-2 text-sm font-semibold text-bg transition hover:-translate-y-0.5 hover:bg-[#5ef0c6] sm:inline-flex"
                     >
                         Resume
+                        <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                     <button
                         type="button"
@@ -119,8 +122,14 @@ export default function SiteHeader() {
                                 </motion.li>
                             ))}
                         </motion.ul>
-                        <a href={personal.resume} className="mt-3 flex justify-center rounded-lg bg-mint px-4 py-3 text-sm font-semibold text-bg">
+                        <a
+                            href={personal.resume}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-3 flex justify-center rounded-lg bg-mint px-4 py-3 text-sm font-semibold text-bg"
+                        >
                             Download resume
+                            <span className="sr-only"> (opens in a new tab)</span>
                         </a>
                     </motion.div>
                 )}

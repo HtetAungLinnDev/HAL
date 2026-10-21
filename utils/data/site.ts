@@ -46,7 +46,7 @@ export const featuredProject = {
         "Multi-branch",
         "Reports",
         "Kitchen display (KDS) & barcode printing",
-        "Kitchen & receipt printing — laser and thermal printers",
+        "Kitchen & receipt printing - laser and thermal printers",
     ],
     apps: [
         { name: "PhiLo POS app", platforms: ["Android", "iOS", "Desktop (Windows)", "macOS", "Web"] },
@@ -68,9 +68,11 @@ export type Project = {
     description: string;
     features: string[];
     stack?: string[];
-    url: string;
+    /** Public site or product page; omit when unreleased. */
+    url?: string;
+    /** Shown in the browser chrome; use a neutral label when there is no public URL. */
     displayUrl: string;
-    linkLabel: string;
+    linkLabel?: string;
     image?: string;
     /** object-position for the screenshot inside the 16:10 frame */
     imagePosition?: string;
@@ -78,6 +80,12 @@ export type Project = {
     label?: string;
     /** Optional role badge, e.g. "Project Lead" */
     role?: string;
+    /** Hiring organisation or product owner */
+    client?: string;
+    /** Extra scope line (e.g. frontend-only); shown under the role badge when set */
+    scope?: string;
+    /** Product status badge on the card */
+    status?: "in-development" | "live";
 };
 
 export const projects: Project[] = [
@@ -156,6 +164,111 @@ export const projects: Project[] = [
         displayUrl: "shannaungyoe.com",
         linkLabel: "Visit site",
         image: "/projects/shannaungyoe.webp",
+    },
+    {
+        name: "Raveon Live",
+        label: "Ravus Law",
+        client: "Ravus Law",
+        market: "Singapore",
+        // status: "in-development",
+        role: "Software Engineer",
+        tagline: "Live-event engagement for concerts - requests, gifting, and multi-screen projection.",
+        description:
+            "Raveon Live is a live-event engagement platform for concerts and large events. I contribute as a software engineer on the web admin panels (Super Admin and Organization), the audience mobile app, and the projection control app that drives venue screens.",
+        features: [
+            "Super Admin & Organization web panels - create and manage events",
+            "Review song/sound requests - approve or reject incoming requests",
+            "Raveon Live mobile app - performers, gifts, and paid song/sound requests",
+            "Paid-request flow - system returns the amount the requester must pay",
+            "Projection app - canvas control across multiple projectors and screens",
+            "Customizable “Top gift” layouts on venue projectors",
+            "RubexPay payment gateway integration",
+        ],
+        stack: [
+            "Backend · Laravel (API)",
+            "Admin · Next.js",
+            "Mobile · React + Ionic",
+            "Projection · Next.js + Electron",
+            "RubexPay (payments)",
+        ],
+        displayUrl: "Unreleased · in development",
+        image: "/projects/raveon-live.jpg",
+        imagePosition: "left top",
+    },
+    {
+        name: "Raveon Live Mini",
+        label: "Ravus Law",
+        client: "Ravus Law",
+        market: "Singapore",
+        // status: "in-development",
+        role: "Software Engineer",
+        tagline: "Lightweight Raveon Live for KTV venues and small events.",
+        description:
+            "A smaller packaging of the Raveon Live experience for karaoke (KTV) rooms and intimate events. It reuses the core song-request, gifting, and paid-request flows in a simpler product surface suited to smaller venues, with the same Super Admin and Organization admin scope as Raveon Live in a reduced feature set for KTV and small events.",
+        features: [
+            "Super Admin & Organization panels - same scope as Raveon Live, reduced for KTV and small events",
+            "Song and sound requests with paid-request pricing feedback",
+            "Gifting flows shared with Raveon Live",
+            "RubexPay payment gateway integration",
+        ],
+        stack: [
+            "Backend · Laravel (API)",
+            "Admin · Next.js",
+            "Mobile · React + Ionic",
+            "RubexPay (payments)",
+        ],
+        displayUrl: "Unreleased · in development",
+        image: "/projects/raveon-live.jpg",
+        imagePosition: "left top",
+    },
+    {
+        name: "Ravus AI FX - Ghost Candle Projection",
+        market: "Singapore",
+        role: "Software Engineer",
+        scope: "Frontend only (Next.js) - provided prediction & market-data APIs",
+        tagline: "TradingView-style chart with AI “ghost candle” projections and quantile ranges.",
+        description:
+            "A public-facing FX dashboard that visualises an AI model’s prediction for the next candle on a candlestick chart. The active prediction appears as a bright blue ghost candle; historical predictions remain as faded ghosts. I built the frontend only in Next.js, consuming the provided prediction and market-data APIs.",
+        features: [
+            "Ghost candle overlay - active prediction plus faded historical predictions",
+            "Q10 / Q50 / Q90 upper and lower ranges (price and pips)",
+            "Prediction time, expiry time, and current close",
+            "Market Watch - symbol, bid, ask, daily %",
+            "Pair & timeframe display (e.g. EUR/USD, M5) and model status",
+            "In-UI note: “Not a buy/sell signal”",
+        ],
+        stack: ["Next.js", "TradingView Lightweight Charts"],
+        displayUrl: "Public dashboard",
+        image: "/projects/ravus-ai-fx.png",
+        imagePosition: "left top",
+        url: "https://fx-trading.asantesting.com/",
+        linkLabel: "Visit site",
+    },
+    {
+        name: "MyTogether",
+        label: "Team project",
+        client: "MyTogether Team",
+        market: "Thailand · Myanmar community",
+        status: "live",
+        role: "Software Engineer",
+        scope: "Team project - backend (NestJS + PostgreSQL) and React.js admin panel, as part of a team (not the mobile app or public website)",
+        tagline: "Guide for Myanmar people in Thailand - shops, news, visa info, rates, and community tools.",
+        description:
+            "MyTogether helps Myanmar residents in Thailand find Myanmar shops and food with map locations, read verified official news and announcements, check visa and document guidance, follow daily THB→MMK exchange rates, use community lost-and-found, and discover travel spots across Thailand. I contributed backend and admin-panel work as part of a team.",
+        features: [
+            "Myanmar shops & food with map locations",
+            "Verified official news and announcements",
+            "Visa and document information",
+            "Daily THB to MMK exchange rates",
+            "Community lost-and-found",
+            "Travel spots across Thailand",
+            "React.js admin panel (my scope)",
+        ],
+        stack: ["NestJS", "PostgreSQL", "Prisma", "AWS S3", "React.js"],
+        url: "https://mytogether.org/",
+        displayUrl: "mytogether.org",
+        linkLabel: "Visit site",
+        image: "/projects/mytogether.png",
     },
 ];
 
