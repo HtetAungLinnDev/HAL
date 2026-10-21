@@ -10,7 +10,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variab
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://hal-three.vercel.app";
 const title = "Htet Aung Linn · Full-Stack Software Engineer";
 const description =
-    "Htet Aung Linn is a full-stack software engineer: Senior Developer at Ravus Law and CTO at PhiLo POS. Projects, skills, experience and contact.";
+    "Htet Aung Linn is a full-stack software engineer: Senior Developer at Ravus Law and Co-Founder & CTO at PhiLo POS. Projects, skills, experience and contact.";
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteUrl),

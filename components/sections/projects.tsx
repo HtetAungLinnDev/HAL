@@ -58,10 +58,16 @@ function Featured() {
                     </Stagger>
                     <h4 className="mt-8 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-3">The product suite</h4>
                     <ul className="mt-3 grid grid-cols-2 gap-2">
-                        {fp.apps.map((a) => (
-                            <li key={a.name} className="rounded-lg bg-white/[0.03] px-3 py-2.5">
+                        {fp.apps.map((a, i) => (
+                            <li key={a.name} className={`rounded-lg bg-white/[0.03] px-3 py-2.5 ${i === 0 ? "col-span-2" : ""}`}>
                                 <p className="text-sm font-medium text-ink">{a.name}</p>
-                                <p className="font-mono text-[11px] text-ink-3">{a.platforms}</p>
+                                <ul className="mt-1.5 flex flex-wrap gap-1.5" aria-label={`${a.name} platforms`}>
+                                    {a.platforms.map((p) => (
+                                        <li key={p} className="rounded-md border border-line bg-white/[0.03] px-2 py-0.5 font-mono text-[11px] text-ink-2">
+                                            {p}
+                                        </li>
+                                    ))}
+                                </ul>
                             </li>
                         ))}
                     </ul>
@@ -164,7 +170,7 @@ export default function Projects() {
                     id="projects-title"
                     eyebrow="Projects"
                     title="Products I’ve built and shipped"
-                    intro="From a point-of-sale platform I lead as CTO to client and team projects delivered for businesses in Myanmar and Japan."
+                    intro="From a point-of-sale platform I co-founded and lead as CTO to client and team projects delivered for businesses in Myanmar and Japan."
                 />
                 <Featured />
                 <Reveal>

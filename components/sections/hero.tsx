@@ -30,7 +30,7 @@ export default function Hero() {
                         <span className="bg-gradient-to-r from-ink via-ink to-mint bg-clip-text text-transparent">Software Engineer</span>
                     </motion.h1>
                     <motion.p variants={item} className="mt-5 text-lg font-medium text-mint">
-                        Senior Developer at Ravus Law <span className="text-ink-3">·</span> CTO at PhiLo POS
+                        Senior Developer at Ravus Law <span className="text-ink-3">·</span> Co-Founder &amp; CTO at PhiLo POS
                     </motion.p>
                     <motion.p variants={item} className="mt-6 max-w-xl text-[17px] leading-relaxed text-ink-2">
                         I build scalable web applications, robust backend systems, and practical software solutions that solve real-world problems.
@@ -58,7 +58,7 @@ export default function Hero() {
                         <li aria-hidden="true">/</li>
                         <li>Senior Developer</li>
                         <li aria-hidden="true">/</li>
-                        <li>CTO</li>
+                        <li>Co-Founder &amp; CTO</li>
                     </motion.ul>
                 </motion.div>
 
@@ -78,7 +78,7 @@ export default function Hero() {
                         transition={{ duration: 0.6, ease, delay: 0.7 }}
                         className="absolute -left-6 bottom-16 rounded-xl border border-line bg-surface-2/95 px-4 py-3 shadow-xl backdrop-blur sm:-left-10"
                     >
-                        <p className="font-mono text-[10px] uppercase tracking-wider text-ink-3">CTO</p>
+                        <p className="font-mono text-[10px] uppercase tracking-wider text-ink-3">Co-Founder &amp; CTO</p>
                         <p className="text-sm font-semibold text-ink">PhiLo POS</p>
                     </motion.div>
                     <motion.div

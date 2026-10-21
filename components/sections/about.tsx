@@ -1,3 +1,4 @@
+import Image from "next/image";
 import SectionHeader from "@/components/site/section-header";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { whatIDo } from "@/utils/data/site";
@@ -7,6 +8,25 @@ export default function About() {
         <section id="about" aria-labelledby="about-title" className="border-t border-line py-24 lg:py-32">
             <div className="mx-auto max-w-6xl px-5 sm:px-8">
                 <SectionHeader id="about-title" eyebrow="About me" title="Building Scalable Software. Solving Real-World Problems." />
+                <Reveal className="mb-12 sm:mb-14">
+                    <figure className="group relative overflow-hidden rounded-3xl border border-line bg-surface p-1.5 shadow-2xl shadow-black/40 sm:p-2">
+                        <div
+                            className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-mint/25 via-transparent to-iris/25 opacity-60 transition-opacity duration-500 group-hover:opacity-100"
+                            aria-hidden="true"
+                        />
+                        <div className="relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.4rem]">
+                            <Image
+                                src="/about-workspace.webp"
+                                alt="Illustrated workspace of Htet Aung Linn showing PhiLo POS, Ravus Law and his tech stack"
+                                width={1536}
+                                height={1024}
+                                loading="lazy"
+                                sizes="(min-width: 1152px) 1104px, calc(100vw - 40px)"
+                                className="h-auto w-full transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.02]"
+                            />
+                        </div>
+                    </figure>
+                </Reveal>
                 <div className="grid gap-10 lg:grid-cols-[1.2fr_.8fr]">
                     <Reveal className="space-y-5 text-[17px] leading-relaxed text-ink-2">
                         <p>
@@ -14,7 +34,7 @@ export default function About() {
                             user-focused software solutions.
                         </p>
                         <p>
-                            Currently, I work as a Senior Developer at Ravus Law and serve as the Chief Technology Officer (CTO) of PhiLo POS, a
+                            Currently, I work as a Senior Developer at Ravus Law and serve as the Co-Founder and Chief Technology Officer (CTO) of PhiLo POS, a
                             point-of-sale software platform designed to help businesses streamline their daily operations.
                         </p>
                         <p className="text-ink-3">
