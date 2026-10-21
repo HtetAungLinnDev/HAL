@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { personal, socials } from "@/utils/data/site";
 
-type Status = "idle" | "sending" | "success" | "error";
+type Status = "idle" | "sending" | "success" | "error" | "limited";
 type FieldErrors = Partial<Record<"name" | "email" | "message", string>>;
 
 const icons: Record<string, string> = {
@@ -14,6 +14,27 @@ const icons: Record<string, string> = {
     facebook: "M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z",
 };
 
+// After a successful send the button stays disabled for this long (persisted across reloads).
+const COOLDOWN_MS = 60 * 1000;
+const COOLDOWN_KEY = "contact-cooldown-until";
+
+function readCooldown() {
+    try {
+        const until = Number(window.localStorage.getItem(COOLDOWN_KEY));
+        return Number.isFinite(until) && until > Date.now() ? until : 0;
+    } catch {
+        return 0;
+    }
+}
+
+function writeCooldown(until: number) {
+    try {
+        window.localStorage.setItem(COOLDOWN_KEY, String(until));
+    } catch {
+        /* storage unavailable (private mode): the in-memory cooldown still applies */
+    }
+}
+
 const inputClass =
     "mt-2 w-full rounded-lg border bg-bg px-4 py-3 text-ink placeholder:text-ink-3/70 transition-colors focus:border-mint focus:outline-none focus:ring-2 focus:ring-mint/20";
 
@@ -21,11 +42,51 @@ export default function Contact() {
     const [status, setStatus] = useState<Status>("idle");
     const [message, setMessage] = useState("");
     const [errors, setErrors] = useState<FieldErrors>({});
+    // When the form became usable; sent as a hidden field so the server can reject instant (bot) submissions.
+    const [startedAt, setStartedAt] = useState(0);
+    const [cooldownUntil, setCooldownUntil] = useState(0);
+    const [now, setNow] = useState(0);
+
+    useEffect(() => {
+        setStartedAt(Date.now());
+        setCooldownUntil(readCooldown());
+        setNow(Date.now());
+    }, []);
+
+    // Tick once a second while a cooldown is running.
+    useEffect(() => {
+        if (cooldownUntil <= Date.now()) return;
+        setNow(Date.now());
+        const id = window.setInterval(() => {
+            const t = Date.now();
+            setNow(t);
+            if (t >= cooldownUntil) window.clearInterval(id);
+        }, 1000);
+        return () => window.clearInterval(id);
+    }, [cooldownUntil]);
+
+    const remaining = Math.max(0, Math.ceil((cooldownUntil - now) / 1000));
+    const coolingDown = remaining > 0;
+
+    const startCooldown = useCallback((ms: number) => {
+        const until = Date.now() + ms;
+        writeCooldown(until);
+        setCooldownUntil(until);
+        setNow(Date.now());
+    }, []);
+
+    useEffect(() => {
+        if (status === "limited" && !coolingDown) {
+            setStatus("idle");
+            setMessage("");
+        }
+    }, [status, coolingDown]);
 
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        if (status === "sending" || coolingDown) return;
         const form = e.currentTarget;
-        const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+        const data = { ...(Object.fromEntries(new FormData(form)) as Record<string, string>), submittedAt: String(Date.now()) };
         setStatus("sending");
         setErrors({});
         setMessage("");
@@ -35,11 +96,18 @@ export default function Contact() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             });
-            const json = (await res.json().catch(() => ({}))) as { ok?: boolean; message?: string; error?: string; errors?: FieldErrors };
+            const json = (await res.json().catch(() => ({}))) as { ok?: boolean; message?: string; error?: string; errors?: FieldErrors; retryAfter?: number; scope?: string };
             if (res.ok && json.ok) {
                 setStatus("success");
                 setMessage(json.message || "Thanks! Your message has been sent.");
                 form.reset();
+                setStartedAt(Date.now());
+                startCooldown(COOLDOWN_MS);
+            } else if (res.status === 429) {
+                const retryAfter = Number(res.headers.get("Retry-After")) || Number(json.retryAfter) || 60;
+                setStatus("limited");
+                setMessage(json.scope === "global" ? "global" : "");
+                startCooldown(retryAfter * 1000);
             } else {
                 setStatus("error");
                 setErrors(json.errors || {});
@@ -125,6 +193,7 @@ export default function Contact() {
                             <label htmlFor="f-website">Website</label>
                             <input id="f-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
                         </div>
+                        <input type="hidden" name="startedAt" value={startedAt || ""} />
                         <div>
                             <label htmlFor="f-name" className="text-sm font-medium text-ink">
                                 Name
@@ -148,9 +217,10 @@ export default function Contact() {
                         </div>
                         <motion.button
                             type="submit"
-                            disabled={status === "sending"}
+                            disabled={status === "sending" || coolingDown}
+                            aria-busy={status === "sending"}
                             whileTap={{ scale: 0.98 }}
-                            className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-mint px-5 text-sm font-semibold text-bg shadow-lg shadow-mint/20 transition-colors hover:bg-[#5ef0c6] disabled:cursor-wait disabled:opacity-80"
+                            className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-mint px-5 text-sm font-semibold text-bg shadow-lg shadow-mint/20 transition-colors hover:bg-[#5ef0c6] disabled:cursor-not-allowed disabled:opacity-70 aria-[busy=true]:cursor-wait"
                         >
                             <AnimatePresence mode="wait" initial={false}>
                                 {status === "sending" ? (
@@ -160,6 +230,10 @@ export default function Contact() {
                                             <path d="M21 12a9 9 0 00-9-9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
                                         </svg>
                                         Sending…
+                                    </motion.span>
+                                ) : coolingDown ? (
+                                    <motion.span key="cooldown" className="inline-flex items-center gap-2 tabular-nums" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }}>
+                                        You can send again in {remaining}s
                                     </motion.span>
                                 ) : (
                                     <motion.span key="idle" className="inline-flex items-center gap-2" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }}>
@@ -183,6 +257,25 @@ export default function Contact() {
                                             <motion.path d="M7.5 12.5l3 3 6-6.5" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.35, delay: 0.4 }} />
                                         </svg>
                                         {message}
+                                    </motion.div>
+                                )}
+                                {status === "limited" && (
+                                    <motion.div
+                                        key="limited"
+                                        initial={{ opacity: 0, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0 }}
+                                        className="rounded-lg border border-amber-300/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-100"
+                                    >
+                                        {message === "global"
+                                            ? "The contact form is getting a lot of messages right now."
+                                            : "You’re sending messages a little too quickly."}{" "}
+                                        Please try again in{" "}
+                                        <span className="font-semibold tabular-nums">{remaining}</span> {remaining === 1 ? "second" : "seconds"}, or email me at{" "}
+                                        <a href={`mailto:${personal.email}`} className="underline underline-offset-2 hover:text-ink">
+                                            {personal.email}
+                                        </a>
+                                        .
                                     </motion.div>
                                 )}
                                 {status === "error" && (

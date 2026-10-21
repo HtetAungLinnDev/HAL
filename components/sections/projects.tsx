@@ -149,7 +149,7 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
                             </span>
                             {p.role && <RoleBadge role={p.role} />}
                         </div>
-                        <h3 className="font-display text-xl font-semibold text-ink">{p.name}</h3>
+                        <h4 className="font-display text-xl font-semibold text-ink">{p.name}</h4>
                         <p className="mt-1 text-[15px] font-medium text-ink-2">{p.tagline}</p>
                         <p className="mt-3 text-sm leading-relaxed text-ink-3">{p.description}</p>
                         <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm text-ink-2" aria-label="Key features">

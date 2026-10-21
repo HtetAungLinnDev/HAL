@@ -29,6 +29,7 @@ export default function Hero() {
                         variants={item}
                         className="mt-4 font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[4.2rem]"
                     >
+                        <span className="sr-only">{personal.name}, </span>
                         Full-Stack
                         <br className="hidden sm:block" />{" "}
                         <span className="bg-gradient-to-r from-ink via-ink to-mint bg-clip-text text-transparent">Software Engineer</span>
