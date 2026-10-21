@@ -54,6 +54,8 @@ export default function Hero() {
                         </MagneticButton>
                         <a
                             href={personal.resume}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="group inline-flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-ink-2 transition-colors hover:text-ink"
                         >
                             <svg
@@ -67,6 +69,7 @@ export default function Hero() {
                                 <path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" />
                             </svg>
                             Resume (PDF)
+                            <span className="sr-only"> (opens in a new tab)</span>
                         </a>
                     </motion.div>
                     <motion.ul

@@ -38,9 +38,19 @@ async function portrait() {
     }
 }
 
+async function brandMark() {
+    try {
+        const file = await readFile(join(process.cwd(), "public", "brand", "hal-logo-dark-1024.png"));
+        return `data:image/png;base64,${file.toString("base64")}`;
+    } catch {
+        return null;
+    }
+}
+
 export default async function Image() {
-    const [photo, ...fonts] = await Promise.all([
+    const [photo, logo, ...fonts] = await Promise.all([
         portrait(),
+        brandMark(),
         googleFont("Space Grotesk", 700),
         googleFont("Inter", 400),
         googleFont("Inter", 600),
@@ -117,6 +127,10 @@ export default async function Image() {
                 <div style={{ display: "flex", width: "100%", padding: "64px 72px 70px", alignItems: "center", justifyContent: "space-between" }}>
                     <div style={{ display: "flex", flexDirection: "column", maxWidth: 740 }}>
                         <div style={{ display: "flex", alignItems: "center", fontFamily: mono, fontSize: 22, letterSpacing: 3, color: colors.mint, textTransform: "uppercase" }}>
+                            {logo && (
+                                // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+                                <img src={logo} width={40} height={40} style={{ display: "flex", marginRight: 14, borderRadius: 10 }} />
+                            )}
                             {host}
                         </div>
                         <div style={{ display: "flex", marginTop: 26, fontFamily: display, fontWeight: 700, fontSize: 92, lineHeight: 1, letterSpacing: -2.5, color: colors.ink }}>

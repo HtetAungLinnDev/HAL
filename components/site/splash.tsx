@@ -27,7 +27,7 @@ export default function Splash() {
         setActive(true);
         try {
             sessionStorage.setItem(SPLASH_KEY, "1");
-        } catch {}
+        } catch { }
         const t = window.setTimeout(() => {
             root.removeAttribute("data-splash");
             setActive(false);
@@ -37,7 +37,11 @@ export default function Splash() {
 
     return (
         <div id="splash" aria-hidden="true" className="fixed inset-0 z-[100] flex-col items-center justify-center gap-3 bg-bg">
-            <MagicLoader size={150} particleCount={3} speed={1.2} tickStep={3} active={active} />
+            <div className="relative flex items-center justify-center">
+                <MagicLoader size={150} particleCount={3} speed={1.2} tickStep={3} active={active} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/brand/hal-logo-dark.svg" alt="" width={56} height={56} className="pointer-events-none absolute h-14 w-14" />
+            </div>
             <p className="font-display text-sm font-semibold tracking-wide text-ink-2">Htet Aung Linn</p>
         </div>
     );

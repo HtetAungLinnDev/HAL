@@ -34,6 +34,21 @@ const RoleBadge = ({ role }: { role: string }) => (
     </span>
 );
 
+const StatusBadge = ({ status }: { status: NonNullable<Project["status"]> }) => {
+    if (status === "live") {
+        return (
+            <span className="rounded-full border border-mint/40 bg-mint/10 px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wider text-mint">
+                Live
+            </span>
+        );
+    }
+    return (
+        <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wider text-amber-200">
+            In development
+        </span>
+    );
+};
+
 function Featured() {
     return (
         <Reveal as="article" className="relative overflow-hidden rounded-3xl border border-line bg-surface">
@@ -134,7 +149,17 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
                     <BrowserFrame
                         url={p.displayUrl}
                         image={p.image}
-                        alt={p.image ? `Screenshot of ${p.displayUrl}` : p.name}
+                        alt={
+                            p.image
+                                ? p.name === "Ravus AI FX - Ghost Candle Projection"
+                                    ? "Ravus AI FX Ghost Candle Projection dashboard showing EUR/USD ghost candles and quantile ranges"
+                                    : p.name === "MyTogether"
+                                        ? "Screenshot of the MyTogether website at mytogether.org"
+                                        : p.name === "Raveon Live" || p.name === "Raveon Live Mini"
+                                            ? "Raveon Live — projection control on laptop and monitor with venue screens in the background"
+                                            : `Screenshot of ${p.displayUrl}`
+                                : `${p.name} preview placeholder`
+                        }
                         placeholder={p.name}
                         position={p.imagePosition}
                         aspect="aspect-[16/9]"
@@ -146,10 +171,13 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
                             <span className="font-mono text-[11px] uppercase tracking-wider text-ink-3">
                                 {String(index + 2).padStart(2, "0")} · {p.market}
                                 {p.label ? ` · ${p.label}` : ""}
+                                {p.client && p.client !== p.label ? ` · ${p.client}` : ""}
                             </span>
+                            {p.status && <StatusBadge status={p.status} />}
                             {p.role && <RoleBadge role={p.role} />}
                         </div>
                         <h4 className="font-display text-xl font-semibold text-ink">{p.name}</h4>
+                        {p.scope && <p className="mt-2 text-xs font-medium leading-relaxed text-ink-3">{p.scope}</p>}
                         <p className="mt-1 text-[15px] font-medium text-ink-2">{p.tagline}</p>
                         <p className="mt-3 text-sm leading-relaxed text-ink-3">{p.description}</p>
                         <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm text-ink-2" aria-label="Key features">
@@ -166,15 +194,21 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
                             </div>
                         )}
                         <div className="mt-auto pt-6">
-                            <a
-                                href={p.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group/link inline-flex items-center gap-2 rounded-lg border border-line px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-mint hover:text-mint"
-                            >
-                                {p.linkLabel}
-                                <span className="sr-only">: {p.name} (opens in a new tab)</span> <ExternalIcon />
-                            </a>
+                            {p.url && p.linkLabel ? (
+                                <a
+                                    href={p.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group/link inline-flex items-center gap-2 rounded-lg border border-line px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-mint hover:text-mint"
+                                >
+                                    {p.linkLabel}
+                                    <span className="sr-only">: {p.name} (opens in a new tab)</span> <ExternalIcon />
+                                </a>
+                            ) : (
+                                <p className="text-sm text-ink-3">
+                                    {p.status === "in-development" ? "No public link - product unreleased." : "No public link."}
+                                </p>
+                            )}
                         </div>
                     </div>
                 </article>

@@ -5,8 +5,8 @@
  * Changes for this site:
  * - Same effect: two curved "chains" of items scroll past a highlighted centre item.
  * - Items take an image logo (the skill SVGs) instead of Lucide icons.
- * - The search box was dropped; prev/next buttons, a pause/play button (WCAG 2.2.2) and
- *   arrow keys control it instead. The moving chains are decorative (aria-hidden); the
+ * - The search box was dropped; prev/next buttons and arrow keys control it instead.
+ *   The moving chains are decorative (aria-hidden); the
  *   centre item is announced politely only when the user steps through it.
  * - Autoplay stops when off-screen (IntersectionObserver instead of a scroll listener that
  *   re-rendered on every scroll), on hover/focus, and never runs with reduced motion.
@@ -15,7 +15,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/components/lib/utils";
 
 export interface ChainItem {
@@ -77,7 +77,6 @@ export function ChainCarousel({
 }) {
     const total = items.length;
     const [index, setIndex] = useState(0);
-    const [playing, setPlaying] = useState(true);
     const [hovered, setHovered] = useState(false);
     const [visible, setVisible] = useState(false);
     const [manual, setManual] = useState(false);
@@ -93,10 +92,10 @@ export function ChainCarousel({
     }, []);
 
     useEffect(() => {
-        if (!playing || hovered || !visible || reduce || total < 2) return;
+        if (hovered || !visible || reduce || total < 2) return;
         const id = window.setInterval(() => setIndex((i) => (i + 1) % total), scrollSpeedMs);
         return () => window.clearInterval(id);
-    }, [playing, hovered, visible, reduce, total, scrollSpeedMs]);
+    }, [hovered, visible, reduce, total, scrollSpeedMs]);
 
     const step = useCallback(
         (dir: 1 | -1) => {
@@ -163,14 +162,6 @@ export function ChainCarousel({
                     <div className="mt-6 flex items-center gap-2">
                         <button type="button" onClick={() => step(-1)} aria-label="Previous skill" className={btn}>
                             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => setPlaying((p) => !p)}
-                            aria-label={playing ? "Pause skills carousel" : "Play skills carousel"}
-                            className={cn(btn, "motion-reduce:hidden")}
-                        >
-                            {playing ? <Pause className="h-4 w-4" aria-hidden="true" /> : <Play className="h-4 w-4" aria-hidden="true" />}
                         </button>
                         <button type="button" onClick={() => step(1)} aria-label="Next skill" className={btn}>
                             <ChevronRight className="h-4 w-4" aria-hidden="true" />

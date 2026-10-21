@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks, personal } from "@/utils/data/site";
 
@@ -39,7 +38,8 @@ export default function SiteHeader() {
         <header className="sticky top-0 z-50 border-b border-line bg-bg/80 backdrop-blur-lg">
             <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
                 <a href="#top" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
-                    <Image src="/logo.png" alt="" width={32} height={32} className="h-8 w-8 rounded-full" />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/brand/hal-logo-dark.svg" alt="" width={32} height={32} className="h-8 w-8 rounded-full" />
                     <span className="font-display text-[15px] font-semibold text-ink">{personal.name}</span>
                 </a>
                 <ul className="hidden items-center gap-1 lg:flex">
@@ -69,9 +69,12 @@ export default function SiteHeader() {
                 <div className="flex items-center gap-2">
                     <a
                         href={personal.resume}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="hidden rounded-lg bg-mint px-4 py-2 text-sm font-semibold text-bg transition hover:-translate-y-0.5 hover:bg-[#5ef0c6] sm:inline-flex"
                     >
                         Resume
+                        <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                     <button
                         type="button"
@@ -119,8 +122,14 @@ export default function SiteHeader() {
                                 </motion.li>
                             ))}
                         </motion.ul>
-                        <a href={personal.resume} className="mt-3 flex justify-center rounded-lg bg-mint px-4 py-3 text-sm font-semibold text-bg">
+                        <a
+                            href={personal.resume}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-3 flex justify-center rounded-lg bg-mint px-4 py-3 text-sm font-semibold text-bg"
+                        >
                             Download resume
+                            <span className="sr-only"> (opens in a new tab)</span>
                         </a>
                     </motion.div>
                 )}
