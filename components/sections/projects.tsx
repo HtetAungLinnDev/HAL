@@ -3,8 +3,8 @@ import SectionHeader from "@/components/site/section-header";
 import BrowserFrame from "@/components/site/browser-frame";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { BorderBeam } from "@/components/lightswind/border-beam";
-import { InteractiveCard } from "@/components/lightswind/interactive-card";
-import { featuredProject as fp, projects, type Project } from "@/utils/data/site";
+import { ProjectsScrollTimeline } from "@/components/lightswind/scroll-timeline";
+import { featuredProject as fp, projects } from "@/utils/data/site";
 
 const ExternalIcon = () => (
     <svg
@@ -33,21 +33,6 @@ const RoleBadge = ({ role }: { role: string }) => (
         Role · {role}
     </span>
 );
-
-const StatusBadge = ({ status }: { status: NonNullable<Project["status"]> }) => {
-    if (status === "live") {
-        return (
-            <span className="rounded-full border border-mint/40 bg-mint/10 px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wider text-mint">
-                Live
-            </span>
-        );
-    }
-    return (
-        <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wider text-amber-200">
-            In development
-        </span>
-    );
-};
 
 function Featured() {
     return (
@@ -138,85 +123,6 @@ function Featured() {
     );
 }
 
-function ProjectCard({ p, index }: { p: Project; index: number }) {
-    return (
-        <StaggerItem as="li" className="h-full">
-            <InteractiveCard
-                interactiveColor={index % 2 ? "rgba(139,147,255,0.16)" : "rgba(52,224,176,0.14)"}
-                className="rounded-2xl border border-line bg-surface transition-colors duration-300 hover:border-white/20"
-            >
-                <article className="group relative z-[1] flex h-full flex-col p-4 sm:p-5">
-                    <BrowserFrame
-                        url={p.displayUrl}
-                        image={p.image}
-                        alt={
-                            p.image
-                                ? p.name === "Ravus AI FX - Ghost Candle Projection"
-                                    ? "Ravus AI FX Ghost Candle Projection dashboard showing EUR/USD ghost candles and quantile ranges"
-                                    : p.name === "MyTogether"
-                                        ? "Screenshot of the MyTogether website at mytogether.org"
-                                        : p.name === "Raveon Live" || p.name === "Raveon Live Mini"
-                                            ? "Raveon Live — projection control on laptop and monitor with venue screens in the background"
-                                            : `Screenshot of ${p.displayUrl}`
-                                : `${p.name} preview placeholder`
-                        }
-                        placeholder={p.name}
-                        position={p.imagePosition}
-                        aspect="aspect-[16/9]"
-                        sizes="(min-width: 768px) 540px, 92vw"
-                        zoomOnHover
-                    />
-                    <div className="relative flex flex-1 flex-col px-1 pt-5">
-                        <div className="mb-2 flex flex-wrap items-center gap-2">
-                            <span className="font-mono text-[11px] uppercase tracking-wider text-ink-3">
-                                {String(index + 2).padStart(2, "0")} · {p.market}
-                                {p.label ? ` · ${p.label}` : ""}
-                                {p.client && p.client !== p.label ? ` · ${p.client}` : ""}
-                            </span>
-                            {p.status && <StatusBadge status={p.status} />}
-                            {p.role && <RoleBadge role={p.role} />}
-                        </div>
-                        <h4 className="font-display text-xl font-semibold text-ink">{p.name}</h4>
-                        {p.scope && <p className="mt-2 text-xs font-medium leading-relaxed text-ink-3">{p.scope}</p>}
-                        <p className="mt-1 text-[15px] font-medium text-ink-2">{p.tagline}</p>
-                        <p className="mt-3 text-sm leading-relaxed text-ink-3">{p.description}</p>
-                        <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm text-ink-2" aria-label="Key features">
-                            {p.features.map((f) => (
-                                <li key={f} className="flex items-start gap-2">
-                                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-mint" aria-hidden="true" />
-                                    {f}
-                                </li>
-                            ))}
-                        </ul>
-                        {p.stack && (
-                            <div className="mt-5">
-                                <Stack items={p.stack} />
-                            </div>
-                        )}
-                        <div className="mt-auto pt-6">
-                            {p.url && p.linkLabel ? (
-                                <a
-                                    href={p.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group/link inline-flex items-center gap-2 rounded-lg border border-line px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-mint hover:text-mint"
-                                >
-                                    {p.linkLabel}
-                                    <span className="sr-only">: {p.name} (opens in a new tab)</span> <ExternalIcon />
-                                </a>
-                            ) : (
-                                <p className="text-sm text-ink-3">
-                                    {p.status === "in-development" ? "No public link - product unreleased." : "No public link."}
-                                </p>
-                            )}
-                        </div>
-                    </div>
-                </article>
-            </InteractiveCard>
-        </StaggerItem>
-    );
-}
-
 export default function Projects() {
     return (
         <section
@@ -232,14 +138,17 @@ export default function Projects() {
                     intro="From a point-of-sale platform I co-founded and lead as CTO to client and team projects delivered for businesses in Myanmar and Japan."
                 />
                 <Featured />
-                <Reveal>
-                    <h3 className="mb-6 mt-20 font-display text-2xl font-semibold text-ink">Client &amp; team projects</h3>
-                </Reveal>
-                <Stagger className="grid gap-6 md:grid-cols-2" stagger={0.1}>
-                    {projects.map((p, i) => (
-                        <ProjectCard key={p.name} p={p} index={i} />
-                    ))}
-                </Stagger>
+                <div className="mt-20 border-t border-line/70 pt-14">
+                    <Reveal className="max-w-xl">
+                        <h3 className="font-display text-2xl font-semibold text-ink">Client &amp; team projects</h3>
+                        <p className="mt-3 text-sm leading-relaxed text-ink-3">
+                            Shipped and in-progress work for clients and teams — stack and scope on each step.
+                        </p>
+                    </Reveal>
+                    <div className="mt-10 w-full min-w-0">
+                        <ProjectsScrollTimeline projects={projects} startIndex={2} />
+                    </div>
+                </div>
             </div>
         </section>
     );

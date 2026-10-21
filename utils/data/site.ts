@@ -1,7 +1,7 @@
 export const personal = {
     name: "Htet Aung Linn",
     title: "Full-Stack Software Engineer",
-    subtitle: "Senior Developer at Ravus Law · Co-Founder & CTO at PhiLo POS",
+    subtitle: "Full Stack Developer at Ravus Law Chambers · Co-Founder & CTO at PhiLo POS",
     email: "htetaunglinn443@gmail.com",
     phone: "+959779009919",
     phoneDisplay: "+95 9 779 009 919",
@@ -170,7 +170,6 @@ export const projects: Project[] = [
         label: "Ravus Law",
         client: "Ravus Law",
         market: "Singapore",
-        // status: "in-development",
         role: "Software Engineer",
         tagline: "Live-event engagement for concerts - requests, gifting, and multi-screen projection.",
         description:
@@ -200,7 +199,6 @@ export const projects: Project[] = [
         label: "Ravus Law",
         client: "Ravus Law",
         market: "Singapore",
-        // status: "in-development",
         role: "Software Engineer",
         tagline: "Lightweight Raveon Live for KTV venues and small events.",
         description:
@@ -238,7 +236,7 @@ export const projects: Project[] = [
             "In-UI note: “Not a buy/sell signal”",
         ],
         stack: ["Next.js", "TradingView Lightweight Charts"],
-        displayUrl: "Public dashboard",
+        displayUrl: "https://fx-trading.asantesting.com",
         image: "/projects/ravus-ai-fx.png",
         imagePosition: "left top",
         url: "https://fx-trading.asantesting.com/",
@@ -250,11 +248,11 @@ export const projects: Project[] = [
         client: "MyTogether Team",
         market: "Thailand · Myanmar community",
         status: "live",
-        role: "Software Engineer",
-        scope: "Team project - backend (NestJS + PostgreSQL) and React.js admin panel, as part of a team (not the mobile app or public website)",
+        role: "Senior Developer",
+        scope: "Team project - Senior Developer on backend (NestJS + PostgreSQL) and React.js admin panel (not the mobile app or public website)",
         tagline: "Guide for Myanmar people in Thailand - shops, news, visa info, rates, and community tools.",
         description:
-            "MyTogether helps Myanmar residents in Thailand find Myanmar shops and food with map locations, read verified official news and announcements, check visa and document guidance, follow daily THB→MMK exchange rates, use community lost-and-found, and discover travel spots across Thailand. I contributed backend and admin-panel work as part of a team.",
+            "MyTogether helps Myanmar residents in Thailand find Myanmar shops and food with map locations, read verified official news and announcements, check visa and document guidance, follow daily THB→MMK exchange rates, use community lost-and-found, and discover travel spots across Thailand. As Senior Developer on the team, I contributed backend and admin-panel work.",
         features: [
             "Myanmar shops & food with map locations",
             "Verified official news and announcements",
@@ -281,22 +279,64 @@ export const skillGroups: { title: string; items: { name: string; icon?: string 
     { title: "Desktop & Mobile", items: [{ name: "Electron.js", icon: "electron" }, { name: "React Native" }, { name: "Ionic", icon: "ionic" }, { name: "Capacitor", icon: "capacitorjs" }] },
 ];
 
-export const experience = [
-    { role: "Senior Developer", org: "Ravus Law", text: "Professional software development involving application engineering, technical problem-solving, and maintainable software systems." },
-    { role: "Co-Founder & Chief Technology Officer (CTO)", org: "PhiLo POS", link: { href: "https://philo.asia", label: "philo.asia" }, text: "A business software platform focused on sales management, inventory workflows, reporting, and operational efficiency." },
-    { role: "PHP Internship", org: "Softguide", date: "Oct 2023" },
+export type ExperienceEntry = {
+    role: string;
+    org: string;
+    date?: string;
+    location?: string;
+    detail?: string;
+    text?: string;
+    skills?: string[];
+    link?: { href: string; label: string };
+};
+
+export const experience: ExperienceEntry[] = [
+    {
+        role: "Co-Founder & Chief Technology Officer (CTO)",
+        org: "PhiLo POS",
+        date: "Since 1 Feb 2026",
+        link: { href: "https://philo.asia", label: "philo.asia" },
+        text: "A business software platform focused on sales management, inventory workflows, reporting, and operational efficiency.",
+    },
+    {
+        role: "Full Stack Developer",
+        org: "Ravus Law Chambers",
+        date: "Sep 2025 – Present",
+        detail: "Full-time",
+        location: "Singapore · Remote",
+        text: "Full-stack application engineering for client systems - Laravel, NestJS, and related technologies.",
+        skills: ["Laravel", "NestJS"],
+    },
+    {
+        role: "Project Leader",
+        org: "SoftGuide Software House",
+        date: "Jan 2025 – Sep 2025",
+        detail: "Full-time · On-site",
+        location: "Yangon Region, Myanmar",
+        text: "Project leadership and delivery, including CRM-focused client work.",
+        skills: ["Customer Relationship Management (CRM)"],
+    },
+    {
+        role: "Web Developer",
+        org: "SoftGuide Software House",
+        date: "Jun 2023 – Jul 2025",
+        detail: "Full-time · On-site",
+        location: "Yangon, Myanmar",
+        text: "Web development on SoftGuide and client products with PHP, Nuxt.js, and the wider stack used in production.",
+        skills: ["Nuxt.js", "PHP"],
+    },
 ];
 
 export const education = [
-    { title: "Physics (second year)", org: "Mandalar University", date: "Since 2018" },
-    { title: "High School", org: "Ye Kyi Pauk Basic Education High School", date: "2005 – 2016" },
+    { title: "Diploma in Computing", org: "NiT College", date: "Aug 2025 – Present" },
+    { title: "Bachelor of Science in Physics", org: "Mandalar University", date: "2018 – Present" },
 ];
 
 export const certifications = [
     { title: "Professional Web Design Course", org: "Code Lab", date: "July 2022", image: "/cert/webDesign.png" },
     { title: "Fullstack Developer Course", org: "Code Lab", date: "September 2022", image: "/cert/fullstackDev.png" },
     { title: "Laravel + Vue.js Full-Stack Course", org: "Code Lab", date: "December 2022", image: "/cert/laravel+vue.png" },
-    { title: "PHP Internship Course", org: "Softguide", date: "October 2023", image: "/cert/softguide_PHP_Internship.jpg" },
+    { title: "PHP Internship Course", org: "SoftGuide", date: "October 2023", image: "/cert/softguide_PHP_Internship.jpg" },
     { title: "Graphic Design Course", org: "IT Home Mandalay", date: "August 2018", image: "/cert/graphicDesign.png" },
 ];
 

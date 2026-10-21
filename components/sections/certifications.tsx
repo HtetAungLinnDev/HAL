@@ -9,7 +9,12 @@ export default function Certifications() {
     return (
         <section id="certifications" aria-labelledby="cert-title" className="border-t border-line py-24 lg:py-32">
             <div className="mx-auto max-w-6xl px-5 sm:px-8">
-                <SectionHeader id="cert-title" eyebrow="Certifications" title="Courses and training" />
+                <SectionHeader
+                    id="cert-title"
+                    eyebrow="Certifications"
+                    title="Courses and training"
+                    intro="Certificates from code schools and internships-the structured courses that sit alongside my degree and on-the-job experience."
+                />
                 <GlowingCards>
                     <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
                         {certifications.map((c, i) => (
