@@ -4,33 +4,51 @@ import "./globals.css";
 import MotionProvider from "@/components/motion/motion-provider";
 import Splash, { splashScript } from "@/components/site/splash";
 import Meteors from "@/components/site/meteors";
+import { defaultTitle, description, keywords, siteName, siteUrl } from "@/lib/seo";
+import { personal } from "@/utils/data/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const display = Space_Grotesk({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-display", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono", display: "swap" });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://hal-three.vercel.app";
-const title = "Htet Aung Linn · Full-Stack Software Engineer";
-const description =
-    "Htet Aung Linn is a full-stack software engineer: Senior Developer at Ravus Law and Co-Founder & CTO at PhiLo POS. Projects, skills, experience and contact.";
-
 export const metadata: Metadata = {
     metadataBase: new URL(siteUrl),
-    title,
+    title: { default: defaultTitle, template: `%s | ${siteName}` },
     description,
+    applicationName: siteName,
+    keywords,
+    authors: [{ name: personal.name, url: `${siteUrl}/` }],
+    creator: personal.name,
+    publisher: personal.name,
+    category: "technology",
     alternates: { canonical: "/" },
-    openGraph: {
-        type: "website",
-        url: "/",
-        siteName: "Htet Aung Linn",
-        title,
-        description,
-        images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Htet Aung Linn, Full-Stack Software Engineer" }],
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
     },
-    twitter: { card: "summary_large_image", title, description, images: ["/og.jpg"] },
+    // Images come from app/opengraph-image.tsx and app/twitter-image.tsx.
+    openGraph: {
+        type: "profile",
+        url: "/",
+        siteName,
+        locale: "en_US",
+        title: defaultTitle,
+        description,
+        firstName: "Htet Aung",
+        lastName: "Linn",
+    },
+    twitter: { card: "summary_large_image", title: defaultTitle, description },
+    // app/favicon.ico is picked up automatically; the 1024px logo doubles as the Apple touch icon.
+    icons: { apple: [{ url: "/logo.png", sizes: "1024x1024", type: "image/png" }] },
 };
 
-export const viewport: Viewport = { themeColor: "#0A0E17" };
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    themeColor: "#0A0E17",
+    colorScheme: "dark",
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (

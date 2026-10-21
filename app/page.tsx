@@ -7,10 +7,13 @@ import Skills from "@/components/sections/skills";
 import Experience from "@/components/sections/experience";
 import Certifications from "@/components/sections/certifications";
 import Contact from "@/components/sections/contact";
+import JsonLd from "@/components/site/json-ld";
+import { homeJsonLd } from "@/lib/seo";
 
 export default function Home() {
     return (
         <>
+            <JsonLd data={homeJsonLd()} />
             <a
                 href="#main"
                 className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-mint focus:px-4 focus:py-2 focus:text-bg"
