@@ -1,13 +1,13 @@
 export const projectsData = [
   {
     id: 1,
-    name: "Hotel Booking (Laravel)",
+    name: "PhiLo POS",
     description:
-      "Laravel Hotel Booking System is a full-featured application designed to simplify the booking process for hotels, resorts, and other lodging providers. Built on Laravel, this project provides an intuitive interface where users can search for available rooms, view room details, check prices, and make reservations seamlessly. Key features include real-time room availability, booking management, customer data handling, and payment integration, ensuring a smooth and secure user experience. The system also supports role-based access for hotel staff, allowing admins to manage room types, bookings, and customer inquiries efficiently. With a robust backend, this Laravel-powered hotel booking system is scalable, secure, and ideal for establishments seeking an online booking solution.",
+      "A point-of-sale and inventory system for shops and restaurants in Myanmar, built by me. Highlights include sales and checkout, inventory and stock transfer, multi-branch support, reports, kitchen printers and a kitchen display system (KDS), and barcode printing. The product includes the PhiLo POS app (Android + web), a KDS Android app, the PhiLo POS Manager app (Android + iOS) and a web admin panel.",
     role: "Htet Aung Linn",
-    language: ["Laravel", "Jquery", "Ajax"],
-    tag: "learn more",
-    url: "https://github.com/HtetAungLinn443/hotel_laravel",
+    language: ["PHP (API backend)", "TypeScript (frontends)"],
+    tag: "Learn More",
+    url: "https://philo.asia",
   },
   {
     id: 2,

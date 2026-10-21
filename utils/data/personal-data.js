@@ -6,7 +6,7 @@ export const personalData = {
   email: "htetaunglinn443@gmail.com",
   phone: "+959779009919",
   address: "Yangon, Myanmar",
-  github: "https://www.github.com/SG-HtetAungLinn",
+  github: "https://github.com/HtetAungLinn443",
   facebook: "https://www.facebook.com/HtetAungLinnDev",
   linkedIn: "https://www.linkedin.com/in/htet-aung-linn-2778b525a",
   twitter: "https://www.twitter.com",
