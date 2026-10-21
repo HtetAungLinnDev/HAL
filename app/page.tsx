@@ -1,44 +1,33 @@
-interface Blog {
-    cover_image?: string;
-}
-import HeroSection from "./components/homepage/hero-section";
-import AboutSection from "./components/homepage/about";
-import Experience from "./components/homepage/experience";
-import Skills from "./components/homepage/skills";
-import Projects from "./components/homepage/projects";
-import Education from "./components/homepage/education";
-import HistorySection from "./components/homepage/history";
-import Blog from "./components/homepage/blog";
-import ContactSection from "./components/homepage/contact";
-import { personalData } from "@/utils/data/personal-data";
+import SiteHeader from "@/components/site/site-header";
+import Footer from "@/components/site/footer";
+import Hero from "@/components/sections/hero";
+import About from "@/components/sections/about";
+import Projects from "@/components/sections/projects";
+import Skills from "@/components/sections/skills";
+import Experience from "@/components/sections/experience";
+import Certifications from "@/components/sections/certifications";
+import Contact from "@/components/sections/contact";
 
-const getData = async () => {
-    const res = await fetch(
-        `https://dev.to/api/articles?username=${personalData.devUsername}`
-    );
-
-    if (!res.ok) {
-        throw new Error("Failed to fetch data");
-    }
-    const data: Blog[] = await res.json();
-    const filtered = data
-        .filter((item: Blog) => item?.cover_image)
-        .sort(() => Math.random() - 0.5);
-    return filtered;
-};
-export default async function Home() {
-    const blogs = await getData();
+export default function Home() {
     return (
         <>
-            <HeroSection />
-            <AboutSection />
-            <Experience />
-            <Skills />
-            <Projects />
-            <Education />
-            <HistorySection />
-            <Blog blogs={blogs} />
-            <ContactSection />
+            <a
+                href="#main"
+                className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-mint focus:px-4 focus:py-2 focus:text-bg"
+            >
+                Skip to content
+            </a>
+            <SiteHeader />
+            <main id="main">
+                <Hero />
+                <About />
+                <Projects />
+                <Skills />
+                <Experience />
+                <Certifications />
+                <Contact />
+            </main>
+            <Footer />
         </>
     );
 }
