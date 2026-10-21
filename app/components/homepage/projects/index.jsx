@@ -16,7 +16,7 @@ const Projects = () => {
             >
                 <div className="sticky top-10">
                     <div className="text-pink-500 text-[14px] my-24 flex justify-center uppercase tracking-widest">
-                        [ Testimonials ]
+                        [ Projects ]
                     </div>
                 </div>
             </Fade>
