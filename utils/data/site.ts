@@ -6,7 +6,7 @@ export const personal = {
     phone: "+959779009919",
     phoneDisplay: "+95 9 779 009 919",
     location: "Mandalay, Myanmar",
-    resume: "/HtetAungLinn.pdf",
+    resume: "/Htet_Aung_Linn_CV.pdf",
     profile: "/profile.jpg",
 };
 
