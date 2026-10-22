@@ -13,8 +13,8 @@
  * - Columns sized for this layout; overflow is clipped so phones never scroll sideways.
  */
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useCallback, useRef, useState } from "react";
+import { motion } from "framer-motion";
 // import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/components/lib/utils";
 
@@ -64,13 +64,13 @@ function Chain({ items, side }: { items: (ChainItem & { d: number })[]; side: "l
 
 export function ChainCarousel({
     items,
-    scrollSpeedMs = 1800,
+    // scrollSpeedMs = 1800,
     visibleItemCount = 7,
     className,
     label = "Skills carousel",
 }: {
     items: ChainItem[];
-    scrollSpeedMs?: number;
+    // scrollSpeedMs?: number;
     visibleItemCount?: number;
     className?: string;
     label?: string;
@@ -78,18 +78,18 @@ export function ChainCarousel({
     const total = items.length;
     const [index, setIndex] = useState(0);
     // const [hovered, setHovered] = useState(false);
-    const [visible, setVisible] = useState(false);
+    // const [visible, setVisible] = useState(false);
     const [manual, setManual] = useState(false);
-    const reduce = useReducedMotion();
+    // const reduce = useReducedMotion();
     const ref = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.2 });
-        io.observe(el);
-        return () => io.disconnect();
-    }, []);
+    // useEffect(() => {
+    //     const el = ref.current;
+    //     if (!el) return;
+    //     // const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.2 });
+    //     io.observe(el);
+    //     return () => io.disconnect();
+    // }, []);
 
     // useEffect(() => {
     //     if (hovered || !visible || reduce || total < 2) return;
