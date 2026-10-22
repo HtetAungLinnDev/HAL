@@ -15,7 +15,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+// import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/components/lib/utils";
 
 export interface ChainItem {
@@ -77,7 +77,7 @@ export function ChainCarousel({
 }) {
     const total = items.length;
     const [index, setIndex] = useState(0);
-    const [hovered, setHovered] = useState(false);
+    // const [hovered, setHovered] = useState(false);
     const [visible, setVisible] = useState(false);
     const [manual, setManual] = useState(false);
     const reduce = useReducedMotion();
@@ -91,11 +91,11 @@ export function ChainCarousel({
         return () => io.disconnect();
     }, []);
 
-    useEffect(() => {
-        if (hovered || !visible || reduce || total < 2) return;
-        const id = window.setInterval(() => setIndex((i) => (i + 1) % total), scrollSpeedMs);
-        return () => window.clearInterval(id);
-    }, [hovered, visible, reduce, total, scrollSpeedMs]);
+    // useEffect(() => {
+    //     if (hovered || !visible || reduce || total < 2) return;
+    //     const id = window.setInterval(() => setIndex((i) => (i + 1) % total), scrollSpeedMs);
+    //     return () => window.clearInterval(id);
+    // }, [hovered, visible, reduce, total, scrollSpeedMs]);
 
     const step = useCallback(
         (dir: 1 | -1) => {
@@ -111,8 +111,8 @@ export function ChainCarousel({
         return { ...items[(index + d + total * 10) % total], d };
     });
     const current = items[index];
-    const btn =
-        "inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-surface text-ink-2 transition-colors hover:border-mint/50 hover:text-ink";
+    // const btn =
+    //     "inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-surface text-ink-2 transition-colors hover:border-mint/50 hover:text-ink";
 
     return (
         <div
