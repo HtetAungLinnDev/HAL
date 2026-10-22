@@ -99,65 +99,71 @@ function TimelineStep({ p, index, listIndex }: { p: Project; index: number; list
                 </div>
 
                 <div className={cn("flex flex-col justify-center", imageFirst ? "lg:order-2 lg:pl-10" : "lg:order-1 lg:pr-10")}>
-                    <article className="rounded-2xl border border-line bg-surface/60 p-6 backdrop-blur-sm sm:p-8">
-                        <div className="flex flex-wrap items-center gap-2">
-                            <span className="font-mono text-[11px] uppercase tracking-wider text-ink-3">
-                                {p.market}
-                                {p.label ? ` · ${p.label}` : ""}
-                                {p.client && p.client !== p.label ? ` · ${p.client}` : ""}
-                            </span>
-                            {p.status && <StatusBadge status={p.status} />}
-                            {p.role && <RoleBadge role={p.role} />}
-                        </div>
-                        <h4 className="mt-4 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{p.name}</h4>
-                        {p.scope && <p className="mt-2 text-sm leading-relaxed text-ink-3">{p.scope}</p>}
-                        <p className="mt-3 text-base font-medium text-ink-2">{p.tagline}</p>
-                        <p className="mt-4 text-sm leading-relaxed text-ink-3">{p.description}</p>
-
-                        <h5 className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-mint">Key features</h5>
-                        <ul className="mt-3 space-y-2.5" aria-label="Key features">
-                            {p.features.map((f) => (
-                                <li key={f} className="flex gap-2.5 text-sm leading-snug text-ink-2">
-                                    <svg aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-mint" viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                    {f}
-                                </li>
-                            ))}
-                        </ul>
-
-                        {p.stack && (
-                            <div className="mt-6">
-                                <h5 className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-3">Stack</h5>
-                                <div className="mt-3">
-                                    <Stack items={p.stack} />
-                                </div>
+                    <InteractiveCard
+                        tilt={false}
+                        interactiveColor={accent}
+                        className="overflow-hidden rounded-2xl border border-line bg-surface/60 backdrop-blur-sm"
+                    >
+                        <article className="relative z-[1] p-6 sm:p-8">
+                            <div className="flex flex-wrap items-center gap-2">
+                                <span className="font-mono text-[11px] uppercase tracking-wider text-ink-3">
+                                    {p.market}
+                                    {p.label ? ` · ${p.label}` : ""}
+                                    {p.client && p.client !== p.label ? ` · ${p.client}` : ""}
+                                </span>
+                                {p.status && <StatusBadge status={p.status} />}
+                                {p.role && <RoleBadge role={p.role} />}
                             </div>
-                        )}
+                            <h4 className="mt-4 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{p.name}</h4>
+                            {p.scope && <p className="mt-2 text-sm leading-relaxed text-ink-3">{p.scope}</p>}
+                            <p className="mt-3 text-base font-medium text-ink-2">{p.tagline}</p>
+                            <p className="mt-4 text-sm leading-relaxed text-ink-3">{p.description}</p>
 
-                        <div className="mt-8 border-t border-line pt-6">
-                            {p.url && p.linkLabel ? (
-                                <a
-                                    href={p.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group/link inline-flex items-center gap-2 rounded-lg bg-mint px-5 py-2.5 text-sm font-semibold text-bg transition hover:-translate-y-0.5 hover:bg-[#5ef0c6]"
-                                >
-                                    {p.linkLabel}
-                                    <ExternalIcon />
-                                    <span className="sr-only">: {p.name} (opens in a new tab)</span>
-                                </a>
-                            ) : (
-                                <p className="text-sm text-ink-3">
-                                    {p.status === "in-development" ? "No public link - product unreleased." : "No public link."}
-                                </p>
+                            <h5 className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-mint">Key features</h5>
+                            <ul className="mt-3 space-y-2.5" aria-label="Key features">
+                                {p.features.map((f) => (
+                                    <li key={f} className="flex gap-2.5 text-sm leading-snug text-ink-2">
+                                        <svg aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-mint" viewBox="0 0 20 20" fill="currentColor">
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                        {f}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {p.stack && (
+                                <div className="mt-6">
+                                    <h5 className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-3">Stack</h5>
+                                    <div className="mt-3">
+                                        <Stack items={p.stack} />
+                                    </div>
+                                </div>
                             )}
-                        </div>
-                    </article>
+
+                            <div className="mt-8 border-t border-line pt-6">
+                                {p.url && p.linkLabel ? (
+                                    <a
+                                        href={p.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group/link inline-flex items-center gap-2 rounded-lg bg-mint px-5 py-2.5 text-sm font-semibold text-bg transition hover:-translate-y-0.5 hover:bg-[#5ef0c6]"
+                                    >
+                                        {p.linkLabel}
+                                        <ExternalIcon />
+                                        <span className="sr-only">: {p.name} (opens in a new tab)</span>
+                                    </a>
+                                ) : (
+                                    <p className="text-sm text-ink-3">
+                                        {p.status === "in-development" ? "No public link - product unreleased." : "No public link."}
+                                    </p>
+                                )}
+                            </div>
+                        </article>
+                    </InteractiveCard>
                 </div>
             </div>
         </motion.li>

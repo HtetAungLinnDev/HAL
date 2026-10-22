@@ -132,12 +132,12 @@ export function ChainCarousel({
                     step(-1);
                 }
             }}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            onFocus={() => setHovered(true)}
-            onBlur={(e) => {
-                if (!e.currentTarget.contains(e.relatedTarget as Node)) setHovered(false);
-            }}
+        // onMouseEnter={() => setHovered(true)}
+        // onMouseLeave={() => setHovered(false)}
+        // onFocus={() => setHovered(true)}
+        // onBlur={(e) => {
+        //     if (!e.currentTarget.contains(e.relatedTarget as Node)) setHovered(false);
+        // }}
         >
             <div className="grid items-center gap-2 md:grid-cols-[1fr_minmax(220px,260px)_1fr] md:gap-6">
                 <div className="hidden md:block">
@@ -159,14 +159,14 @@ export function ChainCarousel({
                         </p>
                         {current.details && <p className="mt-1 text-sm text-ink-3">{current.details}</p>}
                     </motion.div>
-                    <div className="mt-6 flex items-center gap-2">
+                    {/* <div className="mt-6 flex items-center gap-2">
                         <button type="button" onClick={() => step(-1)} aria-label="Previous skill" className={btn}>
                             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                         </button>
                         <button type="button" onClick={() => step(1)} aria-label="Next skill" className={btn}>
                             <ChevronRight className="h-4 w-4" aria-hidden="true" />
                         </button>
-                    </div>
+                    </div> */}
                     <p className="mt-3 font-mono text-[11px] text-ink-3">
                         {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
                     </p>

@@ -18,20 +18,24 @@ export function InteractiveCard({
     className,
     interactiveColor = "rgba(52,224,176,0.16)",
     rotationFactor = 0.35,
+    tilt = true,
 }: {
     children: React.ReactNode;
     className?: string;
     interactiveColor?: string;
     rotationFactor?: number;
+    /** When false, only the pointer-following glow is shown (no 3D tilt). */
+    tilt?: boolean;
 }) {
+    const effectiveRotation = tilt ? rotationFactor : 0;
     const ref = useRef<HTMLDivElement>(null);
     const reduce = useReducedMotion();
     const x = useMotionValue(0.5);
     const y = useMotionValue(0.5);
     const sx = useSpring(x, { stiffness: 220, damping: 22 });
     const sy = useSpring(y, { stiffness: 220, damping: 22 });
-    const rotateX = useTransform(sy, [0, 1], [rotationFactor * 15, -rotationFactor * 15]);
-    const rotateY = useTransform(sx, [0, 1], [-rotationFactor * 15, rotationFactor * 15]);
+    const rotateX = useTransform(sy, [0, 1], [effectiveRotation * 15, -effectiveRotation * 15]);
+    const rotateY = useTransform(sx, [0, 1], [-effectiveRotation * 15, effectiveRotation * 15]);
     const px = useTransform(x, (v) => `${v * 100}%`);
     const py = useTransform(y, (v) => `${v * 100}%`);
     const light = useMotionTemplate`radial-gradient(circle at ${px} ${py}, ${interactiveColor} 0%, transparent 65%)`;
@@ -49,8 +53,16 @@ export function InteractiveCard({
     };
 
     return (
-        <div ref={ref} onPointerMove={onMove} onPointerLeave={reset} className="group/ic h-full [perspective:1000px]">
-            <motion.div style={{ rotateX, rotateY, transformStyle: "preserve-3d" }} className={cn("relative h-full", className)}>
+        <div
+            ref={ref}
+            onPointerMove={onMove}
+            onPointerLeave={reset}
+            className={cn("group/ic h-full", tilt && effectiveRotation > 0 && "[perspective:1000px]")}
+        >
+            <motion.div
+                style={tilt && effectiveRotation > 0 ? { rotateX, rotateY, transformStyle: "preserve-3d" } : undefined}
+                className={cn("relative h-full", className)}
+            >
                 <motion.div
                     aria-hidden="true"
                     style={{ background: light }}
